@@ -15,7 +15,7 @@ void prepArray()
   {
     for (int i = 0; i < width*height; i++)
     {
-      skyArrayBlue[i] = 208 + (int)(random(0, 255-208));
+      skyArrayBlue[i] = 150 + (int)(random(0, 255-150));
     }
   }
   for (int i =0; i < width*height; i++)
