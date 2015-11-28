@@ -4,6 +4,8 @@ float ptx[] = new float[thorns];
 float pty[] = new float[thorns];
 float thornRot[] = new float[thorns];
 float cactusHeight[] = new float[20];
+float cactusX[] = new float[20];
+//ArrayList<Float> cactusX = new ArrayList<Float>(20);
 //float cactusHeight = random(400, 600);
 float cactusY = 150;
 
@@ -18,7 +20,14 @@ void setup() {
     }
   }
   for (int i = 0; i < 20; i++) {
-    cactusHeight[i] = random(600, 6000);
+    if (i > 0) {
+      //cactusX[i] = cactusX[i - 1] + random(20, 200);
+      cactusX[i] = cactusX[i - 1] + random(20, 200);
+      ;
+    }
+  }
+  for (int i = 0; i < 20; i++) {
+    cactusHeight[i] = random(600, 4000);
   }
 }
 
@@ -27,7 +36,7 @@ void draw() {
   for (int i = 0; i < 15; i++) {
     //the 01*150 is (I think) half the width of a cactus
     //random() makes them jittery
-    drawACactus(i/15.0 * width + 0.1*150 + 0.1*random(-50, 50), cactusHeight[i], 0.1);
+    drawACactus(cactusX[i], cactusHeight[i], 0.1);
   }
   //drawACactus(width/4, cactusHeight[0], 0.2);
   //drawACactus(width/2, cactusHeight[1], 0.2);
@@ -36,6 +45,7 @@ void draw() {
   strokeWeight(1);
   line(0, height/2, width, height/2);
   line(width/2, 0, width/2, height);
+  cactusPositionUpdate();
 }
 
 void drawACactus(float x, float y, float scale) {
@@ -139,5 +149,12 @@ void cactusBody(float height) {
     rotate(radians(45));
     rect(0, 0, 12, 12);
     popMatrix();
+  }
+}
+
+//remember to call
+void cactusPositionUpdate() {
+  for (int i = 0; i < 20; i++) {
+    cactusX[i] -= 1;
   }
 }
