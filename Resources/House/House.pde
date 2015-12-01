@@ -8,12 +8,14 @@ float dvx=15;
 float dvxw=14.2;
 float dvy=2;
 int BabyBagX =300;
-
+int MoveCrane=0;
+float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
 boolean clickDoor;
 boolean clickBabyBag;
 
 
 void setup() {
+  smooth();
   size (600, 600);
   clickDoor = false;
 }
@@ -30,6 +32,7 @@ void mousePressed() {
 
 void draw() {
   drawAllTheHouse();
+  crane(120+MoveCrane,330,radians(280),radians(-10), 0);
 }
 
 void drawAllTheHouse() {
@@ -50,7 +53,8 @@ void drawAllTheHouse() {
     dy2= dy2 - dvy;
     dw= dw - dvw;
     dwx= dwx - dvxw;
-    drawBabyBag();
+    drawBabyBag(0,490);
+    MoveCrane=1000;
   }
   if (clickBabyBag == true) {
     gator();
@@ -63,6 +67,148 @@ void drawAllTheHouse() {
     dvw=0;
   }
 }
+  
+void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale) {
+  pushMatrix();
+  ///*
+  translate(craneX, craneY);
+  rotate(craneR);
+  scale(1);
+  rotate(radians(80));
+  translate(-84, -186);
+  //*/
+  //body
+  fill(#fef9dc);
+  pushMatrix();
+  translate(84, 194);
+  rotate(radians(19));
+  ellipse(0, 0, 56, 151);
+  popMatrix();
+  //right leg top
+  fill(#ef5723);
+  pushMatrix();
+  translate(68, 260);
+  rotate(radians(37));
+  rect(0, 0, 6, 36);
+  popMatrix();
+  //right leg bottom
+  pushMatrix();
+  translate(37, 290);
+  rotate(radians(0));
+  rect(0, 0, 6, 90);
+  popMatrix();
+  //right foot
+  pushMatrix();
+  translate(60, 370);
+  rotate(radians(50));
+  translate(-60, -370);
+  pushMatrix();
+  translate(61, 370);
+  rotate(radians(0));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  pushMatrix();
+  translate(60, 376);
+  rotate(radians(30));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  pushMatrix();
+  translate(56, 380);
+  rotate(radians(60));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  popMatrix();
+  //left leg top
+  pushMatrix();
+  translate(55, 260);
+  rotate(radians(30));
+  rect(0, 0, 6, 36);
+  popMatrix();
+  //left leg bottom
+  pushMatrix();
+  translate(41, 289);
+  rotate(radians(57));
+  translate(-50, -287);
+  quad(55, 280, 128, 319, 126, 324, 48, 290);
+  popMatrix();
+  //left foot
+  pushMatrix();
+  translate(48, 380);
+  rotate(radians(50));
+  translate(-50, -380);
+  pushMatrix();
+  translate(47, 380);
+  rotate(radians(0));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  pushMatrix();
+  translate(46, 386);
+  rotate(radians(30));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  pushMatrix();
+  translate(40, 386);
+  rotate(radians(60));
+  ellipse(0, 0, 20, 5);
+  popMatrix();
+  popMatrix();
+  //neck HELP ME!!!!
+  fill(#fef9dc);
+  noFill();
+  strokeWeight(18);
+  stroke(#fef9dc);
+  arc(114, 48, 50, 105, radians(130), radians(180));
+  arc(85, 135, 50, 105, radians(310), radians(360));
+  noStroke();
+  //head rotation
+  pushMatrix();
+  translate(96, 40);
+  rotate(craneHeadR);
+  translate(-96, -40);
+  //head
+  fill(#fef9dc);
+  ellipse(96, 36, 30, 30);
+  //beak top
+  fill(#ef5723);
+  beginShape();
+  vertex(96, 40);
+  vertex(102, 38);
+  vertex(105, 35);
+  vertex(107, 30);
+  vertex(108, 27);
+  vertex(196, 74);
+  endShape(CLOSE);
+  //beak bottom
+  pushMatrix();
+  translate(134, 54);
+  rotate(radians(-13));
+  translate(-130, -64);
+  triangle(96, 40, 176, 93, 98, 50);
+  fill(#e07e2f);
+  triangle(96, 40, 112, 46, 176, 93);
+  popMatrix();
+  //eye
+  fill(255);
+  ellipse(98, 30, 10, 10);
+  //pupil
+  fill(0);
+  ellipse(100, 31, 4, 6);
+  /*//bag
+  fill(#fef9dc);
+  triangle(161, 55, 158, 40, 176, 45);
+  triangle(131, 110, 162, 60, 193, 110);
+  ellipse(162, 138, 80, 90);
+  popMatrix();*/
+  drawBabyBag(-122,138);
+  //wing
+  ellipse(125, 202, wingScale, 70);
+  ellipse(50, 174, wingScale, 70);
+  popMatrix();
+}
+
+
+
+
 
 void gator() {
   pushMatrix();
@@ -239,6 +385,7 @@ void gator() {
   arc(204, 215, 180, 120, 2*PI/8, 6*PI/8);
   //feet
   arc(190, 320, 130, 80, 11*PI/8, 14*PI/8);
+  popMatrix();
   popMatrix();
   noStroke();
 }
@@ -483,9 +630,9 @@ void drawParents() {
   popMatrix();
 }
 
-void drawBabyBag() {
+void drawBabyBag(int x, int y) {
   pushMatrix();
-  translate(BabyBagX, 490);
+  translate(BabyBagX+x, y);
   scale(.9);
   translate(-162, -138);
   fill(#fef9dc);
