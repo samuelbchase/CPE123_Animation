@@ -1,47 +1,54 @@
-int end = 1;
-float craneX, craneY, craneR, craneHeadR, wingX, wingY, wingScale;
+int flyingCounter = 1;
+int secondaryCounter = 1;
+int i = 0;
+float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
 void setup() {
   noStroke();
   smooth();
   size(600, 600);
 }
 void draw() {
-
-  frameRate(60);
-  for (int i=0; i<end; i++) {
-    background(12, 34, 56);
-    craneX = i*.3;
-    craneY = 200+ 10*cos(radians(i));
-    craneR = cos(radians(i))*.1;
-    craneHeadR  = radians(-84);
-    if (i%2 == 0) {
-        wingScale = 50;
-      } else {
-        wingScale = 170;
-      }
-    
-    crane(craneX, craneY, craneR, craneHeadR, wingScale);
+  if (i<300) {
+    craneStanding();
+  } else {
+    craneFlying();
   }
-  if (end<3000) {
-    end+=11;
-  }
-  /*//wing
-   for (int j=0; j<2000; j++) {
-   if (j%2 == 0) {
-   wingX = 135;
-   wingY = 202;
-   
-   } else {
-   wingX = 30;
-   wingY = 174;
-   }
-   ellipse(wingX, wingY, 200, 70);
-   }*/
+  i++;
 }
+
+void craneStanding() {
+  background(12, 34, 56);
+  craneX = 200;
+  craneY = 400;
+  craneR = radians(280);
+  craneHeadR  = radians(-10);
+  //craneLegR = 
+  crane(craneX, craneY, craneR, craneHeadR, wingScale);
+}
+
+void craneFlying() {
+  background(12, 34, 56);
+  if (secondaryCounter % 2 == 0) {
+    wingScale = 50;
+  } else {
+    wingScale = 170;
+  }
+  craneX = flyingCounter;
+  craneY = 200+ 10*cos(radians(flyingCounter));
+  craneR = cos(radians(flyingCounter))*.1;
+  craneHeadR  = radians(-84);
+  crane(craneX, craneY, craneR, craneHeadR, wingScale);
+  flyingCounter++;
+  if (flyingCounter % 7 == 0) {
+    secondaryCounter++;
+  }
+}
+
 void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale) {
   pushMatrix();
   ///*
   translate(craneX, craneY);
+  rotate(craneR);
   scale(.6);
   rotate(radians(80));
   translate(-84, -186);
@@ -123,17 +130,12 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   popMatrix();
   //neck HELP ME!!!!
   fill(#fef9dc);
-  pushMatrix();
-  translate(94, 60);
-  rotate(radians(-16));
-  arc(0, 0, 20, 70, 3*PI/4, 8*PI/6);
-  popMatrix();
-  pushMatrix();
-  translate(97, 94);
-  rotate(radians(-16));
-  arc(0, 0, 31, 120, 3*PI/2, 9*PI/4);
-  popMatrix();
-  quad(104, 108, 114, 109, 120, 139, 110, 132);
+  noFill();
+  strokeWeight(18);
+  stroke(#fef9dc);
+  arc(114, 48, 50, 105, radians(130), radians(180));
+  arc(85, 135, 50, 105, radians(310), radians(360));
+  noStroke();
   //head rotation
   pushMatrix();
   translate(96, 40);
@@ -178,4 +180,3 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(50, 174, wingScale, 70);
   popMatrix();
 }
-

@@ -1,15 +1,6 @@
 color darkC = color(150, 150, 150);
 color lightC = color(211, 211, 211);
 
-
-/*
-//baby bag 
- fill(#fef9dc);
- triangle(161, 55, 158, 40, 176, 45);
- triangle(131, 110, 162, 60, 193, 110);
- ellipse(162, 138, 80, 90);
- */
-
 float leftCloudArm=0;
 boolean leftCloudArmR= true;
 
@@ -22,7 +13,25 @@ void setup() {
 void draw() {
   background(#65B5F5); 
   noStroke();
-  pushMatrix();
+ 
+ drawCloudMan();
+
+  if (leftCloudArm < -.2) {
+    leftCloudArmR = false;
+  } 
+  if (leftCloudArm > .2) {
+    leftCloudArmR = true;
+  }
+
+  if (leftCloudArmR == true) {
+    leftCloudArm -= .005;
+  } else {
+    leftCloudArm += .005;
+  }
+}
+
+void drawCloudMan(){
+   pushMatrix();
   translate(290, 235);
   rotate(leftCloudArm);
   translate(-300, -235);
@@ -32,23 +41,8 @@ void draw() {
   ellipse(245, 220, 60, 80); //left arm
   fill(lightC);
   ellipse(285, 230, 70, 90); //left arm
-  ellipse(240, 215, 60, 80); //left arm  
-  pushMatrix();
-  translate(190, 250);
-  scale(.9);
-  translate(-162, -138);
-  //baby bag 
-  fill(#fef9dc);
-  triangle(161, 55, 158, 40, 176, 45);
-  triangle(131, 110, 162, 60, 193, 110);
-  ellipse(162, 138, 80, 90);
-  popMatrix();
-  fill(darkC);
-  ellipse(190, 190, 30, 40);
-  fill(lightC);
-  ellipse(190, 188, 28, 38);
-  popMatrix();
-
+  ellipse(240, 215, 60, 80); //left arm 
+  drawBabyBag();
   fill(darkC);
   rect(305, 150, 180, 250, 300);
   fill(lightC);
@@ -129,17 +123,21 @@ void draw() {
   fill(lightC);
   arc(0, -5, 75, 35, radians(0), radians(180));
   popMatrix();
+}
 
-  if (leftCloudArm < -.2) {
-    leftCloudArmR = false;
-  } 
-  if (leftCloudArm > .2) {
-    leftCloudArmR = true;
-  }
-
-  if (leftCloudArmR == true) {
-    leftCloudArm -= .005;
-  } else {
-    leftCloudArm += .005;
-  }
+void drawBabyBag() {
+  pushMatrix();
+  translate(190, 250);
+  scale(.9);
+  translate(-162, -138);
+  fill(#fef9dc);
+  triangle(161, 55, 158, 40, 176, 45);
+  triangle(131, 110, 162, 60, 193, 110);
+  ellipse(162, 138, 80, 90);
+  popMatrix();
+  fill(darkC);
+  ellipse(190, 190, 30, 40);
+  fill(lightC);
+  ellipse(190, 188, 28, 38);
+  popMatrix();
 }
