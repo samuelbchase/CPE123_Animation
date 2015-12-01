@@ -1,4 +1,8 @@
+//<<<<<<< HEAD:Resources/craneFlying/craneFlying.pde
+int end = 1;
+//=======
 int flyingCounter = 1;
+//>>>>>>> origin/master:Resources/craneFlyingNEW/craneFlyingNEW.pde
 int secondaryCounter = 1;
 int i = 0;
 float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
@@ -8,6 +12,34 @@ void setup() {
   size(600, 600);
 }
 void draw() {
+//<<<<<<< HEAD:Resources/craneFlying/craneFlying.pde
+    if (i<100) {
+      background(12, 34, 56);
+      craneX = 200;
+      craneY = 400;
+      craneR = radians(280);
+      craneHeadR  = radians(-10);
+      //craneLegR = 
+      crane(craneX, craneY, craneR, craneHeadR, wingScale);
+    } else {
+      background(12, 34, 56);
+      if (secondaryCounter % 2 == 0) {
+        wingScale = 50;
+      } else {
+        wingScale = 170;
+      }
+      craneX = 200+end;
+      craneY = 400+ 10*cos(radians(end));
+      craneR = cos(radians(end))*.1;
+      craneHeadR  = radians(-84)+cos(radians(end))*.1;
+      crane(craneX, craneY, craneR, craneHeadR, wingScale);
+      end++;
+      if (end % 7 == 0) {
+        secondaryCounter++;
+      }      
+    }
+  i++;
+//=======
   if (i<300) {
     craneStanding();
   } else {
@@ -42,6 +74,7 @@ void craneFlying() {
   if (flyingCounter % 7 == 0) {
     secondaryCounter++;
   }
+//>>>>>>> origin/master:Resources/craneFlyingNEW/craneFlyingNEW.pde
 }
 
 void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale) {
