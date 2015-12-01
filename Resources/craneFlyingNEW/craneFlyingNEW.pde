@@ -1,4 +1,4 @@
-int end = 1;
+int flyingCounter = 1;
 int secondaryCounter = 1;
 int i = 0;
 float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
@@ -33,13 +33,13 @@ void craneFlying() {
   } else {
     wingScale = 170;
   }
-  craneX = end;
-  craneY = 200+ 10*cos(radians(end));
-  craneR = cos(radians(end))*.1;
+  craneX = flyingCounter;
+  craneY = 200+ 10*cos(radians(flyingCounter));
+  craneR = cos(radians(flyingCounter))*.1;
   craneHeadR  = radians(-84);
   crane(craneX, craneY, craneR, craneHeadR, wingScale);
-  end++;
-  if (end % 7 == 0) {
+  flyingCounter++;
+  if (flyingCounter % 7 == 0) {
     secondaryCounter++;
   }
 }
