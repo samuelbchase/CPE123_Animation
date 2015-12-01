@@ -13,7 +13,6 @@ boolean clickDoor;
 
 void setup() {
   size (600, 600);
-  background(178, 104, 61);
   clickDoor = false;
 }
 
@@ -25,15 +24,18 @@ void mousePressed() {
 
 
 void draw() {
+  drawAllTheHouse();
+}
+
+  void drawAllTheHouse() {
   noStroke();
-  background(#E3A870);
+  fill(178, 104, 61);
+  rect(0, 0, width, height);
   drawBricks();
   fill(#B27865);
   rect(150, 50, 300, 410);
   drawHouseOutside();
 }
-
-
 
 void drawHouseOutside() {
 
