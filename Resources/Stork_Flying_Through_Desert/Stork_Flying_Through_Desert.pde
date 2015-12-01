@@ -56,10 +56,10 @@ void draw() {
   cactusPositionUpdate();
   shaleCounter++;
 
+  //ground
   fill(225, 126, 53);
   rect(0, 580, width, 20);
 
-  //ground
   craneFlying();
 
   i++;
