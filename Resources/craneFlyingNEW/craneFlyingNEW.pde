@@ -9,29 +9,9 @@ void setup() {
 }
 void draw() {
   if (i<300) {
-    background(12, 34, 56);
-    craneX = 200;
-    craneY = 400;
-    craneR = radians(280);
-    craneHeadR  = radians(-10);
-    //craneLegR = 
-    crane(craneX, craneY, craneR, craneHeadR, wingScale);
+    craneStanding();
   } else {
-    background(12, 34, 56);
-    if (secondaryCounter % 2 == 0) {
-      wingScale = 50;
-    } else {
-      wingScale = 170;
-    }
-    craneX = end;
-    craneY = 200+ 10*cos(radians(end));
-    craneR = cos(radians(end))*.1;
-    craneHeadR  = radians(-84);
-    crane(craneX, craneY, craneR, craneHeadR, wingScale);
-    end++;
-    if (end % 7 == 0) {
-      secondaryCounter++;
-    }
+    craneFlying();
   }
   i++;
 }
@@ -48,20 +28,20 @@ void craneStanding() {
 
 void craneFlying() {
   background(12, 34, 56);
-    if (secondaryCounter % 2 == 0) {
-      wingScale = 50;
-    } else {
-      wingScale = 170;
-    }
-    craneX = end;
-    craneY = 200+ 10*cos(radians(end));
-    craneR = cos(radians(end))*.1;
-    craneHeadR  = radians(-84);
-    crane(craneX, craneY, craneR, craneHeadR, wingScale);
-    end++;
-    if (end % 7 == 0) {
-      secondaryCounter++;
-    }
+  if (secondaryCounter % 2 == 0) {
+    wingScale = 50;
+  } else {
+    wingScale = 170;
+  }
+  craneX = end;
+  craneY = 200+ 10*cos(radians(end));
+  craneR = cos(radians(end))*.1;
+  craneHeadR  = radians(-84);
+  crane(craneX, craneY, craneR, craneHeadR, wingScale);
+  end++;
+  if (end % 7 == 0) {
+    secondaryCounter++;
+  }
 }
 
 void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale) {
