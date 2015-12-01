@@ -5,7 +5,7 @@ boolean leftCloudArmR= true;
 int end = 1;
 int secondaryCounter = 1;
 int i = 0;
-float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY;
+float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
 
 void setup() {
   size(600, 600);
@@ -42,6 +42,8 @@ void draw() {
     bagX = 290;
     bagY = 235;
     craneLegR = radians(290);
+    cloudEyeX = 370;
+    cloudEyeY = 96;
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
      } else if (i<260) {
     if (secondaryCounter % 2 == 0) {
@@ -77,6 +79,8 @@ void draw() {
     bagY = craneY+cos(radians(end))*18+63;
     craneLegR =0;
     leftCloudArm = 0;
+    cloudEyeX = 370+1*(i-260)/100;
+    cloudEyeY = 97+1*(i-260)/400;
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
     end++;
     if (end % 7 == 0) {
@@ -182,7 +186,7 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   popMatrix();
   popMatrix();
   popMatrix();
-  //neck HELP ME!!!!
+  //neck 
   fill(#fef9dc);
   noFill();
   strokeWeight(18);
@@ -247,13 +251,9 @@ void drawCloudMan() {
   fill(lightC);
   ellipse(285, 230, 70, 90); //left arm
   ellipse(240, 215, 60, 80); //left arm 
-  //drawBabyBag();
-  //hand
-  
-  //drawHand();
   popMatrix();
  
-  fill(darkC);
+ fill(darkC);
   rect(305, 150, 180, 250, 300);
   fill(lightC);
   rect(300, 150, 180, 250, 300);
@@ -310,19 +310,22 @@ void drawCloudMan() {
   ellipse(515, 220, 60, 80); //right arm
   fill(lightC);
   ellipse(480, 245, 70, 90); //right arm
-  ellipse(510, 215, 60, 80); //right arm  
+  ellipse(510, 215, 60, 80); //right arm 
   fill(darkC, 200);
   ellipse(370, 95, 50, 40);
   ellipse(410, 95, 50, 40); 
   fill(255);
   ellipse(376, 95, 30, 30);
   ellipse(404, 95, 30, 30);
+  
+  //make eyes move!!cloudEyeX,Y = 370, 96
   fill(#55118E);
-  ellipse(370, 96, 15, 15);
-  ellipse(397, 94, 15, 15);
+  ellipse(cloudEyeX, cloudEyeY, 15, 15);
+  ellipse(cloudEyeX+27, cloudEyeY-2, 15, 15);
+  
   fill(255);
-  ellipse(375, 93, 5, 5);
-  ellipse(401, 91, 5, 5);
+  ellipse(cloudEyeX+5, cloudEyeY-3, 5, 5);
+  ellipse(cloudEyeX+31, cloudEyeY-5, 5, 5);
   fill(lightC);
   ellipse(390, 137, 96, 76); //nose
   pushMatrix();
