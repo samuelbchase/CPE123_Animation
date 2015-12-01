@@ -1,11 +1,11 @@
 void gator() {
   pushMatrix();
+  ///*
   translate(300, 490);
   scale(.3);
   translate(-300, -200);
+  //*/
   //spikes on back
-  fill(#fef9dc);
-  ellipse(300, 300, 460, 120);
   fill(#517A46);
   ellipse(330, 119, 37, 42);
   ellipse(389, 121, 42, 43);
@@ -171,8 +171,21 @@ void gator() {
   arc(214, 178, 48, 30, 10*PI/8, 14*PI/8);
   //throat
   arc(204, 215, 180, 120, 2*PI/8, 6*PI/8);
-  //feet
+  //feet lines
   arc(190, 320, 130, 80, 11*PI/8, 14*PI/8);
-  popMatrix();
+  arc(310, 328, 130, 80, 10*PI/8, 13*PI/8);
+  arc(313, 300, 130, 100, radians(300), radians(380));
+  arc(413, 240, 130, 100, radians(-20), radians(90));
+  arc(270, 239, 180, 100, radians(90), radians(130));
+  //nose
+  //arc(107, 90, 100, 100, radians(20), radians(90));
+  //arc(84, 164, 50, 80, radians(290), radians(360));
   noStroke();
+  //teeth
+  fill(255);
+  triangle(82, 195, 93, 203, 98, 192);
+  triangle(157, 194, 167, 182, 173, 198);
+  triangle(208, 186, 221, 190, 214, 175);
+  popMatrix();
 }
+
