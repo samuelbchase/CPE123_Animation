@@ -5,6 +5,7 @@ float cactusY = 150;
 int shaleCounter = 0;
 float shaleHeight[] = new float[100];
 
+boolean mouseWasClicked = false;
 int flyingCounter = 1;
 int secondaryCounter = 1;
 int i = 0;
@@ -186,7 +187,11 @@ void craneFlying() {
   } else {
     wingScale = 170;
   }
-  craneX = flyingCounter;
+  if (flyingCounter < 180) {
+    craneX++;
+  } else if (mouseWasClicked) {
+    craneX++;
+  }
   craneY = 200+ 10*cos(radians(flyingCounter));
   craneR = cos(radians(flyingCounter))*.1;
   craneHeadR  = radians(-84);
@@ -333,4 +338,8 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(125, 202, wingScale, 70);
   ellipse(50, 174, wingScale, 70);
   popMatrix();
+}
+
+void mouseClicked() {
+  mouseWasClicked = true;
 }
