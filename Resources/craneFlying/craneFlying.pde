@@ -1,5 +1,4 @@
 int end = 1;
-int secondaryCounter = 1;
 float craneX, craneY, craneR, craneHeadR, wingX, wingY, wingScale;
 void setup() {
   noStroke();
@@ -7,36 +6,25 @@ void setup() {
   size(600, 600);
 }
 void draw() {
-  background(12, 34, 56);
-  //for (int i=0; i<end; i++) {
 
-  //  craneX = i*.3;
-  //  craneY = 200+ 10*cos(radians(i));
-  //  //craneR = cos(radians(i))*.1;
-  //  craneHeadR  = radians(-84);
-  //  if (end%2 == 0) {
-  //      wingScale = 50;
-  //    } else {
-  //      wingScale = 170;
-  //    }
-  //  background(12, 34, 56);
-  //  crane(craneX, craneY, 0, craneHeadR, wingScale);
-  //}
-  if (secondaryCounter%2 == 0) {
-    wingScale = 50;
-  } else {
-    wingScale = 170;
+  frameRate(60);
+  for (int i=0; i<end; i++) {
+    background(12, 34, 56);
+    craneX = i*.3;
+    craneY = 200+ 10*cos(radians(i));
+    craneR = cos(radians(i))*.1;
+    craneHeadR  = radians(-84);
+    if (i%2 == 0) {
+        wingScale = 50;
+      } else {
+        wingScale = 170;
+      }
+    
+    crane(craneX, craneY, craneR, craneHeadR, wingScale);
   }
-  craneX = end;
-  craneY = 200 + 10*cos(radians(end));
-  craneR = cos(radians(end))*0.1;
-  craneHeadR = radians(-84);
-  crane(craneX, craneY, craneR, craneHeadR, wingScale);
-  end+=1;
-  if (end%7 == 1) {
-    secondaryCounter++;
+  if (end<3000) {
+    end+=11;
   }
-  
   /*//wing
    for (int j=0; j<2000; j++) {
    if (j%2 == 0) {
@@ -54,7 +42,6 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   pushMatrix();
   ///*
   translate(craneX, craneY);
-  rotate(craneR);
   scale(.6);
   rotate(radians(80));
   translate(-84, -186);
@@ -191,3 +178,4 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(50, 174, wingScale, 70);
   popMatrix();
 }
+
