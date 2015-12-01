@@ -1,39 +1,39 @@
 int thorns=60;
 
+int numberOfCacti = 100;
 float ptx[] = new float[thorns];
 float pty[] = new float[thorns];
 float thornRot[] = new float[thorns];
-float cactusHeight[] = new float[20];
-float cactusX[] = new float[20];
+float cactusHeight[] = new float[numberOfCacti];
+float cactusX[] = new float[numberOfCacti];
 //ArrayList<Float> cactusX = new ArrayList<Float>(20);
-//float cactusHeight = random(400, 600);
 float cactusY = 150;
+
 
 void setup() {
   size(600, 600);
-  background(0);
-  for (int j = 0; j < 20; j++) {
+  for (int j = 0; j < numberOfCacti; j++) {
     for (int i=0; i<thorns; i++) {
       ptx[i]= random(135, 315);
       pty[i]= random(160, cactusHeight[j]);
       thornRot[i] = random(radians(0), radians (360));
     }
   }
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < numberOfCacti; i++) {
     if (i > 0) {
       //cactusX[i] = cactusX[i - 1] + random(20, 200);
       cactusX[i] = cactusX[i - 1] + random(20, 200);
       ;
     }
   }
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < numberOfCacti; i++) {
     cactusHeight[i] = random(600, 4000);
   }
 }
 
 void draw() {
-  background(255);
-  for (int i = 0; i < 15; i++) {
+  background(244, 209, 138);
+  for (int i = 0; i < numberOfCacti; i++) {
     //the 01*150 is (I think) half the width of a cactus
     //random() makes them jittery
     drawACactus(cactusX[i], cactusHeight[i], 0.1);
@@ -154,7 +154,7 @@ void cactusBody(float height) {
 
 //remember to call
 void cactusPositionUpdate() {
-  for (int i = 0; i < 20; i++) {
-    cactusX[i] -= 1;
+  for (int i = 0; i < numberOfCacti; i++) {
+    cactusX[i] -= 2;
   }
 }
