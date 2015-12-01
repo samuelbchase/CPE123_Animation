@@ -1,51 +1,52 @@
-int thorns=60;
-
 int numberOfCacti = 100;
-float ptx[] = new float[thorns];
-float pty[] = new float[thorns];
-float thornRot[] = new float[thorns];
 float cactusHeight[] = new float[numberOfCacti];
 float cactusX[] = new float[numberOfCacti];
-//ArrayList<Float> cactusX = new ArrayList<Float>(20);
 float cactusY = 150;
-
+int shaleCounter = 0;
+float shaleHeight[] = new float[100];
 
 void setup() {
   size(600, 600);
-  for (int j = 0; j < numberOfCacti; j++) {
-    for (int i=0; i<thorns; i++) {
-      ptx[i]= random(135, 315);
-      pty[i]= random(160, cactusHeight[j]);
-      thornRot[i] = random(radians(0), radians (360));
-    }
-  }
   for (int i = 0; i < numberOfCacti; i++) {
     if (i > 0) {
-      //cactusX[i] = cactusX[i - 1] + random(20, 200);
       cactusX[i] = cactusX[i - 1] + random(20, 200);
-      ;
     }
   }
   for (int i = 0; i < numberOfCacti; i++) {
     cactusHeight[i] = random(600, 4000);
   }
+  for (int i = 0; i < 100; i++) {
+    shaleHeight[i] = random(100, 300);
+  }
 }
 
 void draw() {
   background(244, 209, 138);
+  //rect(200 - shaleCounter, 200, 200, 400);
+  //rect(600 - shaleCounter, 200, 400, 400);
+  fill(71, 24, 106);
+  pushMatrix();
+  translate(-shaleCounter, 0);
+  beginShape();
+  vertex(0, 600);
+  for (int i = 0; i < 100; i++) {
+    vertex(80*i + shaleHeight[i]/20, shaleHeight[i]);
+  }
+  //vertex(0, 600);
+  //vertex(0, random(100, 300));
+  //vertex(200, random(100, 300));
+  //vertex(random(100, 300), 600);
+  //vertex(0, 600);
+  vertex(400, 6*600);
+  endShape(CLOSE);
+  popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    //the 01*150 is (I think) half the width of a cactus
-    //random() makes them jittery
     drawACactus(cactusX[i], cactusHeight[i], 0.1);
   }
-  //drawACactus(width/4, cactusHeight[0], 0.2);
-  //drawACactus(width/2, cactusHeight[1], 0.2);
-  //drawACactus(3*width/4, cactusHeight[2], 0.2);
   stroke(0);
   strokeWeight(1);
-  line(0, height/2, width, height/2);
-  line(width/2, 0, width/2, height);
   cactusPositionUpdate();
+  shaleCounter++;
 }
 
 void drawACactus(float x, float y, float scale) {
@@ -89,15 +90,6 @@ void cactusBody(float height) {
   rect(60, 330, 100, 50, 90);
   rect(340, 280, 50, 80, 90, 90, 10, 10);
   rect(290, 330, 100, 50, 90);
-  for (int i=0; i<thorns; i++) {
-    noStroke();
-    pushMatrix();
-    translate(ptx[i], pty[i]);
-    rotate(thornRot[i]);
-    fill(#0E6717, 200);
-    triangle(0, 0, 3, 12, -3, 12);
-    popMatrix();
-  }
   fill(#D1A639); //sombrero brown
   ellipse(225, 170, 250, 60);
   rect(185, 50, 80, 100, 200, 200, 0, 0);
