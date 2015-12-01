@@ -1,82 +1,49 @@
 int end = 1;
 int secondaryCounter = 1;
-float craneX, craneY, craneR, craneHeadR, wingX, wingY, wingScale;
+int i = 0;
+float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
 void setup() {
   noStroke();
   smooth();
   size(600, 600);
 }
 void draw() {
-  background(12, 34, 56);
-  //for (int i=0; i<end; i++) {
-
-<<<<<<< HEAD
-  //frameRate(0);
-  for (int i=0; i<end; i++) {
-    background(12, 34, 56);
-    craneX = i*.3;
-    craneY = 200+ 10*cos(radians(i));
-    craneR = cos(radians(i))*.1;
-    craneHeadR  = radians(-84);
-    if (i%2 == 0) {
+    if (i<300) {
+      background(12, 34, 56);
+      craneX = 200;
+      craneY = 400;
+      craneR = radians(280);
+      craneHeadR  = radians(-10);
+      //craneLegR = 
+      crane(craneX, craneY, craneR, craneHeadR, wingScale);
+    } else {
+      background(12, 34, 56);
+      if (secondaryCounter % 2 == 0) {
         wingScale = 50;
       } else {
         wingScale = 170;
       }
-    println(i);
-    crane(craneX, craneY, craneR, craneHeadR, wingScale);
-=======
-  //  craneX = i*.3;
-  //  craneY = 200+ 10*cos(radians(i));
-  //  //craneR = cos(radians(i))*.1;
-  //  craneHeadR  = radians(-84);
-  //  if (end%2 == 0) {
-  //      wingScale = 50;
-  //    } else {
-  //      wingScale = 170;
-  //    }
-  //  background(12, 34, 56);
-  //  crane(craneX, craneY, 0, craneHeadR, wingScale);
-  //}
-  if (secondaryCounter%2 == 0) {
-    wingScale = 50;
-  } else {
-    wingScale = 170;
->>>>>>> origin/master
-  }
-  craneX = end;
-  craneY = 200 + 10*cos(radians(end));
-  craneR = cos(radians(end))*0.1;
-  craneHeadR = radians(-84);
-  crane(craneX, craneY, craneR, craneHeadR, wingScale);
-  end+=1;
-  if (end%7 == 1) {
-    secondaryCounter++;
-  }
-  
-  /*//wing
-   for (int j=0; j<2000; j++) {
-   if (j%2 == 0) {
-   wingX = 135;
-   wingY = 202;
-   
-   } else {
-   wingX = 30;
-   wingY = 174;
-   }
-   ellipse(wingX, wingY, 200, 70);
-   }*/
-   
+      craneX = end;
+      craneY = 200+ 10*cos(radians(end));
+      craneR = cos(radians(end))*.1;
+      craneHeadR  = radians(-84);
+      crane(craneX, craneY, craneR, craneHeadR, wingScale);
+      end++;
+      if (end % 7 == 0) {
+        secondaryCounter++;
+      }      
+    }
+  i++;
 }
 void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale) {
   pushMatrix();
-  /*
+  ///*
   translate(craneX, craneY);
   rotate(craneR);
   scale(.6);
   rotate(radians(80));
   translate(-84, -186);
-  */
+  //*/
   //body
   fill(#fef9dc);
   pushMatrix();
@@ -159,17 +126,6 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   stroke(#fef9dc);
   arc(114, 48, 50, 105, radians(130), radians(180));
   arc(85, 135, 50, 105, radians(310), radians(360));
- /* pushMatrix();
-  translate(94, 60);
-  rotate(radians(-16));
-  arc(0, 0, 20, 70, 3*PI/4, 8*PI/6);
-  popMatrix();
-  pushMatrix();
-  translate(97, 94);
-  rotate(radians(-16));
-  arc(0, 0, 31, 120, 3*PI/2, 9*PI/4);
-  popMatrix();
-  quad(104, 108, 114, 109, 120, 139, 110, 132);*/
   noStroke();
   //head rotation
   pushMatrix();
@@ -215,3 +171,4 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(50, 174, wingScale, 70);
   popMatrix();
 }
+
