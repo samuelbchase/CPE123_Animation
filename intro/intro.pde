@@ -55,7 +55,6 @@ void draw() {
     craneY = 300;
     craneR = radians(280)+ (radians(i-180));
     craneHeadR  = radians(-10)- (radians(i-180));
-    //craneHeadR  = radians(-10)+ (radians((i-180)/2));
     bagX = craneX+170+70* (cos(radians(280)+ (radians(i-180))));
     bagY = craneY+45+70* (sin(radians(280)+ (radians(i-180))));
     craneLegR =0;
