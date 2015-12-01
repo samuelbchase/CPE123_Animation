@@ -7,8 +7,10 @@ float dvw=.6;
 float dvx=15;
 float dvxw=14.2;
 float dvy=2;
+int BabyBagX =300;
 
 boolean clickDoor;
+boolean clickBabyBag;
 
 
 void setup() {
@@ -20,6 +22,9 @@ void mousePressed() {
   if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460 ) {
     clickDoor = true;
   }
+  if (clickDoor ==true && (mouseX-300)*(mouseX-300) + (mouseY-490)*(mouseY-490) - 1600 <0) {
+    clickBabyBag = true;
+  }
 }
 
 
@@ -27,20 +32,215 @@ void draw() {
   drawAllTheHouse();
 }
 
-  void drawAllTheHouse() {
+void drawAllTheHouse() {
   noStroke();
   fill(178, 104, 61);
   rect(0, 0, width, height);
   drawBricks();
   fill(#B27865);
-  rect(150, 50, 300, 410);
-  drawHouseOutside();
+  rect(150, 50, 300, 423);
+  drawGround();
+  if (clickDoor) {
+    drawParents();
+  }
+  drawDoor();
+  if (clickDoor) {
+    dx= dx- dvx;
+    dy= dy+ dvy;
+    dy2= dy2 - dvy;
+    dw= dw - dvw;
+    dwx= dwx - dvxw;
+    drawBabyBag();
+  }
+  if (clickBabyBag == true) {
+    gator();
+    BabyBagX=1000;
+  }
+  if (dx <= 210) {
+    dvx=0;
+    dvy=0;
+    dvxw=0;
+    dvw=0;
+  }
 }
 
-void drawHouseOutside() {
-
-  drawGround();
-  drawDoor();
+void gator() {
+  pushMatrix();
+  translate(300, 490);
+  scale(.3);
+  translate(-300, -200);
+  //spikes on back
+  fill(#fef9dc);
+  ellipse(300, 300, 460, 120);
+  fill(#517A46);
+  ellipse(330, 119, 37, 42);
+  ellipse(389, 121, 42, 43);
+  ellipse(440, 151, 28, 35);
+  ellipse(472, 172, 32, 19);
+  beginShape();
+  vertex(276, 136);
+  vertex(318, 103);
+  vertex(340, 103);
+  vertex(351, 113);
+  vertex(380, 101);
+  vertex(406, 108);
+  vertex(422, 134);
+  vertex(438, 133);
+  vertex(454, 149);
+  vertex(458, 168);
+  vertex(478, 163);
+  vertex(489, 171);
+  vertex(500, 184);
+  vertex(464, 205);
+  endShape(CLOSE);
+  //base
+  fill (123, 185, 106);
+  ellipse(344, 206, 233, 186);
+  ellipse(70, 155, 74, 69);
+  ellipse(159, 86, 68, 119);
+  ellipse(207, 94, 82, 139);
+  ellipse(445, 240, 64, 82);
+  pushMatrix();
+  translate(500, 211);
+  rotate(radians(-44));
+  ellipse(0, 0, 96, 41);
+  popMatrix();
+  pushMatrix();
+  translate(454, 292);
+  rotate(radians(23));
+  ellipse(0, 0, 40, 19);
+  popMatrix();
+  pushMatrix();
+  translate(438, 304);
+  rotate(radians(14));
+  ellipse(0, 0, 49, 20);
+  popMatrix();
+  ellipse(408, 316, 84, 24);
+  pushMatrix();
+  translate(338, 328);
+  rotate(radians(-18));
+  ellipse(0, 0, 77, 25);
+  popMatrix();
+  pushMatrix();
+  translate(304, 320);
+  rotate(radians(-13));
+  ellipse(0, 0, 76, 23);
+  popMatrix();
+  pushMatrix();
+  translate(286, 308);
+  rotate(radians(-10));
+  ellipse(0, 0, 75, 23);
+  popMatrix();
+  pushMatrix();
+  translate(168, 314);
+  rotate(radians(18));
+  ellipse(0, 0, 68, 27);
+  popMatrix();
+  pushMatrix();
+  translate(197, 305);
+  rotate(radians(15));
+  ellipse(0, 0, 68, 27);
+  popMatrix();
+  pushMatrix();
+  translate(218, 295);
+  rotate(radians(25));
+  ellipse(0, 0, 65, 18);
+  popMatrix();
+  ellipse(154, 286, 55, 67);
+  ellipse(82, 194, 54, 29);
+  beginShape();
+  vertex(87, 124);
+  vertex(94, 126);
+  vertex(104, 122);
+  vertex(116, 112);
+  vertex(130, 58);
+  vertex(234, 42);
+  vertex(254, 80);
+  vertex(269, 101);
+  vertex(285, 114);
+  vertex(306, 118);
+  vertex(441, 156);
+  vertex(462, 173);
+  vertex(476, 180);
+  vertex(490, 184);
+  vertex(504, 182);
+  vertex(536, 166);
+  vertex(537, 177);
+  vertex(534, 190);
+  vertex(472, 240);
+  vertex(446, 280);
+  vertex(443, 303);
+  vertex(323, 330);
+  vertex(239, 304);
+  vertex(170, 302);
+  vertex(141, 258);
+  vertex(118, 236);
+  vertex(102, 225);
+  vertex(70, 207);
+  endShape(CLOSE);
+  //left eye
+  fill(255);
+  pushMatrix();
+  translate(136, 90);
+  rotate(radians(18));
+  ellipse(0, 0, 56, 83);
+  popMatrix();
+  //left pupil
+  fill(0);
+  pushMatrix();
+  translate(143, 78);
+  rotate(radians(16));
+  ellipse(0, 0, 47, 55);
+  popMatrix();
+  //nose
+  fill (123, 185, 106);
+  beginShape();
+  vertex(133, 131);
+  vertex(143, 123);
+  vertex(149, 115);
+  vertex(157, 99);
+  vertex(176, 154);
+  endShape(CLOSE);
+  //right eye
+  fill(255);
+  pushMatrix();
+  translate(194, 98);
+  rotate(radians(19));
+  ellipse(0, 0, 72, 89);
+  popMatrix();
+  //right pupil
+  fill (0);
+  pushMatrix();
+  translate(186, 90);
+  rotate(radians(0));
+  ellipse(0, 0, 54, 54);
+  popMatrix();
+  pushMatrix();
+  translate(190, 85);
+  rotate(radians(20));
+  ellipse(0, 0, 54, 62);
+  popMatrix();
+  //cheek
+  fill (123, 185, 106);
+  pushMatrix();
+  translate(217, 145);
+  rotate(radians(-11));
+  ellipse(0, 0, 63, 33);
+  popMatrix();
+  //smile
+  noFill();
+  stroke(#517A46);
+  strokeWeight(2);
+  arc(80, 178, 60, 30, 2*PI/8, 6*PI/8);
+  arc(124, 203, 60, 40, 10*PI/8, 14*PI/8);
+  arc(174, 164, 80, 70, 0, 6*PI/8);
+  arc(214, 178, 48, 30, 10*PI/8, 14*PI/8);
+  //throat
+  arc(204, 215, 180, 120, 2*PI/8, 6*PI/8);
+  //feet
+  arc(190, 320, 130, 80, 11*PI/8, 14*PI/8);
+  popMatrix();
+  noStroke();
 }
 
 void drawBricks() {
@@ -53,21 +253,6 @@ void drawBricks() {
 }
 
 void drawDoor() {
-  if (clickDoor) {
-    drawParents();
-    dx= dx- dvx;
-    dy= dy+ dvy;
-    dy2= dy2 - dvy;
-    dw= dw - dvw;
-    dwx= dwx - dvxw;
-  }
-  if (dx <= 210) {
-    dvx=0;
-    dvy=0;
-    dvxw=0;
-    dvw=0;
-  }
-
   fill(#E8ECF2);
   beginShape();
   vertex(0, 480);
@@ -98,8 +283,6 @@ void drawDoor() {
   vertex(185, 95);
   vertex(185, 480);
   endShape();
-  fill(157, 138, 110);
-  quad(180, 480, 185, 460, 420, 460, 420, 480);
 
   fill(#3D5481);
   quad(185, 90, dx, dy, dx, dy2, 185, 460); //main blue
@@ -297,5 +480,17 @@ void drawParents() {
   fill(#64322B, 100);
   ellipse(75, 57, 7, 15); //nose
 
+  popMatrix();
+}
+
+void drawBabyBag() {
+  pushMatrix();
+  translate(BabyBagX, 490);
+  scale(.9);
+  translate(-162, -138);
+  fill(#fef9dc);
+  triangle(161, 55, 158, 40, 176, 45);
+  triangle(131, 110, 162, 60, 193, 110);
+  ellipse(162, 138, 80, 90);
   popMatrix();
 }
