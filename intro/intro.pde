@@ -10,7 +10,6 @@ float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY, clou
 void setup() {
   size(600, 600);
   smooth();
-  size(600, 600);
 }
 
 
