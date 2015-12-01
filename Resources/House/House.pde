@@ -204,6 +204,7 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(125, 202, wingScale, 70);
   ellipse(50, 174, wingScale, 70);
   popMatrix();
+  popMatrix();
 }
 
 
@@ -385,7 +386,6 @@ void gator() {
   arc(204, 215, 180, 120, 2*PI/8, 6*PI/8);
   //feet
   arc(190, 320, 130, 80, 11*PI/8, 14*PI/8);
-  popMatrix();
   popMatrix();
   noStroke();
 }
