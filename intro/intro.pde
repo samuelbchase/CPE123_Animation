@@ -1,5 +1,15 @@
 color darkC = color(150, 150, 150);
 color lightC = color(211, 211, 211);
+int clouds = 10;
+int stars = 80;
+float starx[] = new float[stars];
+float stary[] = new float[stars];
+float cloudx[] = new float[clouds];
+float cloudy[] = new float[clouds];
+float cloudSize[] = new float[clouds];
+float cloudO=.2;
+float cloudT;
+float skycount=1;
 float leftCloudArm=0;
 boolean leftCloudArmR= true;
 int end = 1;
@@ -10,12 +20,21 @@ float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY, clou
 void setup() {
   size(600, 600);
   smooth();
+  for (int i=0; i<clouds; i++) {
+    cloudx[i]= random(0, width);
+    cloudy[i]= random(0, height);
+    cloudSize[i]= random(.2, .6 );
+  }
+  for (int i=0; i<stars; i++) {
+    starx[i]= random(0, width);
+    stary[i]= random(0, height);
+  }
 }
 
 void draw() {
   background(#65B5F5); 
   noStroke();
-
+ // drawSky();
   drawCloudMan();
   drawBabyBag(bagX, bagY, leftCloudArm);
   drawHand();
@@ -43,7 +62,7 @@ void draw() {
     cloudEyeX = 370;
     cloudEyeY = 96;
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
-     } else if (i<260) {
+  } else if (i<260) {
     if (secondaryCounter % 2 == 0) {
       wingScale = 50;
     } else {
@@ -87,4 +106,3 @@ void draw() {
   i++;
   println(i);
 }
-
