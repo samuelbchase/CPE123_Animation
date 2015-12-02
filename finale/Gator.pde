@@ -5,6 +5,9 @@ void gator() {
   scale(.3);
   translate(-300, -200);
   //*/
+  //collapsed bag
+  fill(#fef9dc);
+  ellipse(300, 300, 460, 120);
   //spikes on back
   fill(#517A46);
   ellipse(330, 119, 37, 42);
