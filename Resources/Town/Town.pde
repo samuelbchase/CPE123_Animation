@@ -1,14 +1,20 @@
+float hcount = 0;
 void setup()
 {
   size(600,600);
-  background(#3299CC);
-  drawLawn();
-  drawHouses();
 }
 
 void draw()
 {
+  background(#3299CC);
+  drawLawn();
+  pushMatrix();
+
+  translate(-2 * hcount,0);
+  drawHouses();
+  popMatrix();
   
+  hcount+=.4;
 }
 void drawLawn()
 {
@@ -23,7 +29,7 @@ void drawLawn()
 void drawHouses()
 {
   int counter =0;
-  for(int i = 15; i < 600; i += 75)
+  for(int i = 15; i < 600*100; i += 75)
   {
     pushMatrix(); //house base
     if(counter % 3 == 0)
