@@ -1,22 +1,19 @@
 color darkC = color(150, 150, 150);
 color lightC = color(211, 211, 211);
 int clouds = 10;
-int stars = 80;
-float starx[] = new float[stars];
-float stary[] = new float[stars];
 float cloudx[] = new float[clouds];
 float cloudy[] = new float[clouds];
 float cloudSize[] = new float[clouds];
-float cloudO=.2;
-float cloudT;
-float skycount=1;
+int cloudT=255;
 float leftCloudArm=0;
 boolean leftCloudArmR= true;
+float rightCloudArm=0;
+boolean rightCloudArmR= true;
 int end = 1;
 int secondaryCounter = 1;
 int i = 0;
 float craneX, craneY, craneR, craneHeadR, craneNeckR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
-
+float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
 int houseCounter = 0;
 
 void setup() {
@@ -30,10 +27,11 @@ void setup() {
     cloudy[i]= random(0, height);
     cloudSize[i]= random(.2, .6 );
   }
-  for (int i=0; i<stars; i++) {
-    starx[i]= random(0, width);
-    stary[i]= random(0, height);
-  }
+  cloudmanx=390;
+  cloudmany=147;
+  cloudmanvx=-2;
+  cloudmanvy=-.1;
+  cloudmanSize=1;
   craneX = -170;
 
   noStroke();  
@@ -68,11 +66,29 @@ void draw() {
   if (i < 1350) {
     background(#65B5F5); 
     noStroke();
-    // drawSky();
+    for (int i=0; i<clouds; i++) {
+      drawCloud(cloudx[i], cloudy[i], cloudSize[i]);
+    }
     drawCloudMan();
     drawBabyBag(bagX, bagY, leftCloudArm);
     drawHand();
+    if (i>=257) {
+      if (rightCloudArm < -.2) {
+        rightCloudArmR = false;
+      } 
+      if (rightCloudArm > .2) {
+        rightCloudArmR = true;
+      }
 
+      if (rightCloudArmR == true) {
+        rightCloudArm -= .008;
+      } else {
+        rightCloudArm += .008;
+      }
+      cloudmanx=cloudmanx+cloudmanvx;
+      cloudmany=cloudmany+cloudmanvy;
+      cloudmanSize=cloudmanSize*.998;
+    }
     if (leftCloudArm < -.2) {
       leftCloudArmR = false;
     } 
@@ -147,8 +163,7 @@ void draw() {
       drawDesertScene();
     } else if (craneHasLooped == 3) {
       drawCityScene();
-    }
-    else if (craneHasLooped == 4) {
+    } else if (craneHasLooped == 4) {
       background(#7ec0ee);
       drawLawn();
       drawHouses();
@@ -218,6 +233,3 @@ void draw() {
     houseCounter++;
   }
 }
-
-
-
