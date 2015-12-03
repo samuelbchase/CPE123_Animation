@@ -5,11 +5,24 @@ float cactusY = 150;
 int shaleCounter = 0;
 float shaleHeight[] = new float[100];
 
-boolean mouseWasClicked = false;
+int mouseWasClicked = 0;
 int flyingCounter = 1;
 int secondaryCounter = 1;
 int i = 0;
 float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR;
+
+int craneHasLooped = 0;
+
+int SamCityHeights[] = new int[100];
+int SamCityWidths[] = new int[100];
+int SamCityDistBetween[] = new int[100];
+int SamCityRoofs[] = new int[100];
+int animation = 0;
+
+int forestTreeX = 0;
+int treeCounter = 0;
+float randomTreeHeights[] = new float[300];
+float randomTreeOffsets[] = new float[300];
 
 void setup() {
   noStroke();
@@ -34,15 +47,43 @@ void setup() {
       shaleHeight[i] = random(-100, 100) + shaleHeight[i - 1];
     }
   }
+  //TREE STUFF
+  for (int i = 0; i < randomTreeHeights.length; i++) {
+    randomTreeHeights[i] = random(0, 300);
+  }
+  for (int i = 0; i < randomTreeOffsets.length; i++) {
+    randomTreeOffsets[i] = random(-10, 10);
+  }
+  setupCity();
 }
 
 void draw() {
+  if (craneHasLooped == 1) {
+    drawDesertScene();
+  } else if (craneHasLooped == 2) {
+    drawCityScene();
+  } else if (craneHasLooped == 0) {
+    drawForestScene();
+  }
+
+  craneFlying();
+
+  //i++;
+  if (craneX > 750 ) {
+    craneX = -200;
+  }
+  if (craneX == 750) {
+    craneHasLooped++;
+  }
+}
+
+void drawDesertScene() {
   background(244, 209, 138);
   fill(71, 24, 106);
   pushMatrix();
   translate(-shaleCounter, 0);
   beginShape();
-  vertex(0, 600);
+  vertex(-20, 600);
   for (int i = 0; i < 100; i++) {
     vertex(80*i + shaleHeight[i]/20, shaleHeight[i]);
   }
@@ -60,10 +101,6 @@ void draw() {
   //ground
   fill(225, 126, 53);
   rect(0, 580, width, 20);
-
-  craneFlying();
-
-  i++;
 }
 
 void drawACactus(float x, float y, float scale) {
@@ -189,7 +226,7 @@ void craneFlying() {
   }
   if (flyingCounter < 180) {
     craneX++;
-  } else if (mouseWasClicked) {
+  } else if (mouseWasClicked >= 1) {
     craneX++;
   }
   craneY = 200+ 10*cos(radians(flyingCounter));
@@ -341,5 +378,77 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
 }
 
 void mouseClicked() {
-  mouseWasClicked = true;
+  mouseWasClicked++;
+}
+
+void setupCity()
+{  
+  //sets city heights. Run in setup
+  for (int i = 0; i < 100; i++)
+  {
+    SamCityHeights[i] = 200 + int(random(0, 300));
+    SamCityWidths[i] = 20 + int(random(0, 30));
+    SamCityDistBetween[i] = 50 + int(random(0, 10));
+    SamCityRoofs[i] = 30 + int(random(0, 30));
+  }
+}
+
+void drawBuilding(int i, int x)
+{
+  fill(123, 144, 149);
+  pushMatrix();  
+  translate(SamCityDistBetween[i]+ 60*i - x - 20, 600);
+  rect(0, 0, SamCityWidths[i], -SamCityHeights[i]);
+  translate(SamCityWidths[i]/2, -SamCityHeights[i]);
+  triangle(-SamCityRoofs[i]/2, 0, SamCityRoofs[i]/2, 0, 0, -20);
+  line(0, -20, 0, -15+random(-20, 0));
+  popMatrix();
+}
+
+void treeMaker(float treeHeight, float treeOffset) //this makes lots of trees
+{
+  pushMatrix();
+  noStroke();
+  translate(forestTreeX + treeOffset, 600 - treeHeight);
+  forestTreeX+=20;
+  fill(#5E2605);
+  rect(0, treeHeight, 10, -treeHeight - 50);
+  pushMatrix();
+  fill(#006400);
+  translate(5, -20);
+  triangle(-20, 0, 0, -20, 20, 0);  
+  for (int i = 0; i < treeHeight/10 + 1; i++) {
+    translate(0, -10);
+    triangle(-20, 0, 0, -20, 20, 0);
+  }
+  //translate(0, -10);
+  //triangle(-20, 0, 0, -20, 20, 0);  
+  //translate(0, -10);
+  //triangle(-20, 0, 0, -20, 20, 0);  
+  popMatrix();
+  popMatrix();
+}
+
+void drawCityScene() {
+  background(0);
+  animation+=2;
+  for (int i =0; i < 99; i++)
+  {
+    drawBuilding(i, animation);
+  }
+}
+
+void drawForestScene() {
+  background(71, 183, 251);
+    forestTreeX=0;
+    pushMatrix();
+    translate(-treeCounter*2, 0);
+    for (int i = 0; i < 300; i++)
+    {
+      treeMaker(randomTreeHeights[i], randomTreeOffsets[i]);
+    }
+    popMatrix();
+    treeCounter++;
+    fill(109, 69, 33);
+    rect(0, 587, width, 50);
 }
