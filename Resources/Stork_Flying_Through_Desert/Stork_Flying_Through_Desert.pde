@@ -18,16 +18,21 @@ int SamCityWidths[] = new int[100];
 int SamCityDistBetween[] = new int[100];
 int SamCityRoofs[] = new int[100];
 int animation = 0;
+float starYPositions[] = new float[600];
+int roadStripePositions[] = new int[20];
 
 int forestTreeX = 0;
 int treeCounter = 0;
 float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
 
-void setup() {
+void setup() {  
+  craneX = -170;
+  
   noStroke();
   smooth();
   size(600, 600);
+  
   for (int i = 0; i < numberOfCacti; i++) {
     if (i > 0) {
       cactusX[i] = cactusX[i - 1] + random(20, 200);
@@ -50,27 +55,25 @@ void setup() {
   //TREE STUFF
   for (int i = 0; i < randomTreeHeights.length; i++) {
     randomTreeHeights[i] = random(0, 300);
-  }
-  for (int i = 0; i < randomTreeOffsets.length; i++) {
     randomTreeOffsets[i] = random(-10, 10);
   }
   setupCity();
 }
 
 void draw() {
-  if (craneHasLooped == 1) {
+  if (craneHasLooped == 0) {
+    drawForestScene();
+  } else if (craneHasLooped == 1) {
     drawDesertScene();
   } else if (craneHasLooped == 2) {
     drawCityScene();
-  } else if (craneHasLooped == 0) {
-    drawForestScene();
   }
 
   craneFlying();
 
   //i++;
   if (craneX > 750 ) {
-    craneX = -200;
+    craneX = -170;
   }
   if (craneX == 750) {
     craneHasLooped++;
@@ -224,7 +227,7 @@ void craneFlying() {
   } else {
     wingScale = 170;
   }
-  if (flyingCounter < 180) {
+  if (flyingCounter < 180 + 170) {
     craneX++;
   } else if (mouseWasClicked >= 1) {
     craneX++;
@@ -391,6 +394,12 @@ void setupCity()
     SamCityDistBetween[i] = 50 + int(random(0, 10));
     SamCityRoofs[i] = 30 + int(random(0, 30));
   }
+  for (int i = 0; i < 600; i++) {
+    starYPositions[i] = random(0, 600);
+  }
+    for (int i = 0; i < 20; i++) {
+    roadStripePositions[i] = 2*i * 620/40;
+  }
 }
 
 void drawBuilding(int i, int x)
@@ -431,24 +440,37 @@ void treeMaker(float treeHeight, float treeOffset) //this makes lots of trees
 
 void drawCityScene() {
   background(0);
+  for (int i = 0; i < 600; i++) {
+    ellipse(i, starYPositions[i], random(1, 2), random(1, 2));
+  }
   animation+=2;
   for (int i =0; i < 99; i++)
   {
     drawBuilding(i, animation);
   }
+  fill(0);
+  rect(0, 550, width, 50);
+  fill(200, 200, 0);
+  for (int i = 0; i < 20; i++) {
+    rect(roadStripePositions[i], 572, 620/40, 5);
+    roadStripePositions[i] -= 2;
+    if (roadStripePositions[i] < -10) {
+      roadStripePositions[i] = 610;
+    }
+  }
 }
 
 void drawForestScene() {
   background(71, 183, 251);
-    forestTreeX=0;
-    pushMatrix();
-    translate(-treeCounter*2, 0);
-    for (int i = 0; i < 300; i++)
-    {
-      treeMaker(randomTreeHeights[i], randomTreeOffsets[i]);
-    }
-    popMatrix();
-    treeCounter++;
-    fill(109, 69, 33);
-    rect(0, 587, width, 50);
+  forestTreeX=0;
+  pushMatrix();
+  translate(-treeCounter*2, 0);
+  for (int i = 0; i < 300; i++)
+  {
+    treeMaker(randomTreeHeights[i], randomTreeOffsets[i]);
+  }
+  popMatrix();
+  treeCounter++;
+  fill(109, 69, 33);
+  rect(0, 587, width, 50);
 }
