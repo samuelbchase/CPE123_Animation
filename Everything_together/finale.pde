@@ -10,7 +10,7 @@ float dvy=2;
 int parentCounter=1;
 boolean clickDoor;
 boolean clickBabyBag;
-
+color[] foo;
 void mousePressed() {
   if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460 ) {
     clickDoor = true;
@@ -358,17 +358,29 @@ void gator() {
   popMatrix();
 }
 
+void prepGround()
+{
+  i = 0;
+  foo = new color[600*600];
+  for(int i =0; i < 600*600; i++)
+  {
+    foo[i] = color(random(20, 50), random(80, 200), random(0, 30));
+  }
+}
 void drawGround() {
   /*fill(#1C853C);
   rect(0, 470, 600, 200);*/
+
+  i=0;
   for (int x=-10; x< width; x+=random (2, 5)) {
     for (int y=470; y< height; y++) {
-      fill(random(20, 50), random(80, 200), random(0, 30));
+      fill(foo[i]);
       pushMatrix();
       translate(x, y);
       rotate(radians(30));
       rect(0, 0, 5, 20);
       popMatrix();
+      i++;
     }
   }
   fill(#481F11);

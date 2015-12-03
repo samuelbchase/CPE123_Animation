@@ -23,7 +23,6 @@ void setup() {
   size(600, 600);
   wingScale = 0;
   smooth();
-  prepGround();
   clickDoor = false;
   for (int i=0; i<clouds; i++) {
     cloudx[i]= random(0, width);
@@ -140,18 +139,13 @@ void draw() {
     }
     i++;
     println(i);
-  } else if (craneHasLooped < 5) {
+  } else if (craneHasLooped < 4) {
     if (craneHasLooped == 1) {
       drawForestScene();
     } else if (craneHasLooped == 2) {
       drawDesertScene();
     } else if (craneHasLooped == 3) {
       drawCityScene();
-    }
-    else if (craneHasLooped == 4) {
-      background(#7ec0ee);
-      drawLawn();
-      drawHouses();
     }
 
     craneFlying();
@@ -218,6 +212,3 @@ void draw() {
     houseCounter++;
   }
 }
-
-
-
