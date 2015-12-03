@@ -15,11 +15,15 @@ boolean leftCloudArmR= true;
 int end = 1;
 int secondaryCounter = 1;
 int i = 0;
-float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
+float craneX, craneY, craneR, craneHeadR, craneNeckR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
+
+int houseCounter = 0;
 
 void setup() {
   size(600, 600);
+  wingScale = 0;
   smooth();
+  clickDoor = false;
   for (int i=0; i<clouds; i++) {
     cloudx[i]= random(0, width);
     cloudy[i]= random(0, height);
@@ -90,7 +94,8 @@ void draw() {
       craneLegR = radians(290);
       cloudEyeX = 370;
       cloudEyeY = 96;
-      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
+      craneNeckR = 0;
+      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
     } else if (i<260) {
       if (secondaryCounter % 2 == 0) {
         wingScale = 50;
@@ -105,7 +110,7 @@ void draw() {
       bagY = craneY+45+70* (sin(radians(280)+ (radians(i-180))));
       craneLegR =0;
       leftCloudArm = 0;
-      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
+      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
       end++;
       if (end % 7 == 0) {
         secondaryCounter++;
@@ -126,7 +131,7 @@ void draw() {
       leftCloudArm = 0;
       cloudEyeX = 370+1*(i-260)/100;
       cloudEyeY = 97+1*(i-260)/400;
-      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR);
+      crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
       end++;
       if (end % 7 == 0) {
         secondaryCounter++;
@@ -134,7 +139,7 @@ void draw() {
     }
     i++;
     println(i);
-  } else {
+  } else if (craneHasLooped < 4) {
     if (craneHasLooped == 1) {
       drawForestScene();
     } else if (craneHasLooped == 2) {
@@ -152,5 +157,58 @@ void draw() {
     if (craneX >= 750) {
       craneHasLooped++;
     }
+  } else {
+    drawAllTheHouse();
+    if (houseCounter<10) {
+      //crane standing
+      wingScale = 0;
+      craneX = 210;
+      craneY = 420;
+      craneR = radians(280);
+      craneHeadR  = radians(-10);
+      craneNeckR = 0;
+      bagX = craneX+55;
+      bagY = craneY-8;
+      craneLegR = radians(290);
+    } else if (houseCounter<18) {
+      //crane sets down bag
+      craneNeckR = (radians(houseCounter-10))*4;
+      craneHeadR = (radians(-10)- (radians(houseCounter-10))*4);
+      bagX = craneX+42+76*(cos(radians(280)+ 4*(radians(houseCounter-10))));//should be 300, 490 at end
+      bagY = craneY+67+76*(sin(radians(280)+ 4*(radians(houseCounter-10))));
+    } else if (houseCounter<25) {
+      //crane lifts head back up
+      craneNeckR = (radians(houseCounter-25))*-4;
+      craneHeadR = (radians(-10)- (radians(houseCounter-25))*-4);
+      bagX = 300;//should be ~300, 490 at end
+      bagY = 428.8+9.8*(houseCounter-18);
+    } else if (houseCounter<35) {
+      //crane rotates from standing to flying position
+      /* if (i % 2 == 0) {
+       wingScale = 50;
+       } else {
+       wingScale = 170;
+       }*/
+      craneX = 210;
+      craneY = 420;
+      craneR = radians(280)+ 4*(radians(houseCounter-25));
+      craneHeadR  = radians(-10)- 4*(radians(houseCounter-25));
+    } else if (houseCounter<133) {
+      //crane flying
+      if (houseCounter % 2 == 0) {
+        wingScale = 50;
+      } else {
+        wingScale = 170;
+      }
+      craneX = 210+(houseCounter-33)*10;
+      craneY = 420-(houseCounter-33)*6;
+      craneHeadR  = radians(-84)+cos(radians(houseCounter))*.1;
+      craneLegR =0;
+    }
+    i++;
+    println(i);
+    drawBabyBag(bagX, bagY);
+    crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
+    houseCounter++;
   }
 }

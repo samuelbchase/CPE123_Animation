@@ -1,4 +1,4 @@
-void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale, float craneLegR) {
+void crane(float craneX, float craneY, float craneR, float craneHeadR, float wingScale, float craneLegR, float craneNeckR) {
   pushMatrix();
   ///*
   translate(craneX, craneY);
@@ -21,8 +21,7 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   rotate(radians(37));
   rect(0, 0, 8, 36);
   popMatrix();
-  
-  
+
   //right leg bottom
   pushMatrix();
   translate(46, 289);
@@ -51,15 +50,12 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   ellipse(0, 0, 20, 5);
   popMatrix();
   popMatrix();
-  
-  
   //left leg top
   pushMatrix();
   translate(55, 260);
   rotate(radians(30));
   rect(0, 0, 8, 36);
   popMatrix();
-  
   //rotate leg to standing
   pushMatrix();
   translate(37, 290);
@@ -71,7 +67,6 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   rotate(radians(0));
   rect(0, 0, 6, 90);
   popMatrix();
-  
   //left foot
   pushMatrix();
   translate(48, 380);
@@ -94,6 +89,12 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   popMatrix();
   popMatrix();
   popMatrix();
+  
+  //rotate neck
+  pushMatrix();
+  translate(65, 147);
+  rotate(craneNeckR);
+  translate(-65, -147);
   //neck 
   fill(#fef9dc);
   noFill();
@@ -102,6 +103,7 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
   arc(114, 48, 50, 105, radians(130), radians(180));
   arc(85, 135, 50, 105, radians(310), radians(360));
   noStroke();
+  //popMatrix();
   //head rotation
   pushMatrix();
   translate(96, 40);
@@ -140,6 +142,7 @@ void crane(float craneX, float craneY, float craneR, float craneHeadR, float win
    triangle(161, 55, 158, 40, 176, 45);
    triangle(131, 110, 162, 60, 193, 110);
    ellipse(162, 138, 80, 90);*/
+  popMatrix();
   popMatrix();
   //wing
   fill(#fef9dc);
