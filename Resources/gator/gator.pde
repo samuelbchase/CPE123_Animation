@@ -1,10 +1,16 @@
+float gatorHeadR = 0;
+
 void setup() {
   size (600, 600);
   noStroke();
   noLoop();
 }
 void draw() {
+
+
+
   gator(gatorHeadR);
+
 }
 void gator(float gatorHeadR) {
   pushMatrix();
@@ -106,7 +112,7 @@ void gator(float gatorHeadR) {
   vertex(146, 250);
   endShape(CLOSE);
   //neck
-  ellipse(219, 189, 160, 160);
+  ellipse(209, 184, 210, 184);
   //make head move
   pushMatrix();
   translate(181, 163);
@@ -128,7 +134,8 @@ void gator(float gatorHeadR) {
   vertex(269, 101);
   vertex(285, 114);
   vertex(302, 122);
-  vertex(141, 258);
+  
+  vertex(157, 252);
   vertex(118, 236);
   vertex(102, 225);
   vertex(70, 207);

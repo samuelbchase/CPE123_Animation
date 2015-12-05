@@ -11,7 +11,7 @@ int end = 1;
 int secondaryCounter = 1;
 int parentCounter=1;
 int i = 0;
-float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR, bagX, bagY;
+float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR, bagX, bagY, gatorHeadR;
 boolean clickDoor;
 boolean clickBabyBag;
 
@@ -54,17 +54,17 @@ void draw() {
     craneHeadR = (radians(-10)- (radians(i-25))*-4);
     bagX = 300;//should be ~300, 490 at end
     bagY = 428.8+9.8*(i-18);
-  } else if (i<35) {
+  } else if (i<30) {
     //crane rotates from standing to flying position
-    /* if (i % 2 == 0) {
+    if (i % 2 == 0) {
      wingScale = 50;
      } else {
      wingScale = 170;
-     }*/
-    craneX = 210;
-    craneY = 420;
-    craneR = radians(280)+ 4*(radians(i-25));
-    craneHeadR  = radians(-10)- 4*(radians(i-25));
+     }
+    craneX = 210+(i-25)*5;
+    craneY = 420-(i-25)*2;
+    craneR = radians(280)+ 8*(radians(i-25));
+    craneHeadR  = radians(-10)- 8*(radians(i-25));
   } else if (i<133) {
     //crane flying
     if (i % 2 == 0) {
@@ -72,8 +72,8 @@ void draw() {
     } else {
       wingScale = 170;
     }
-    craneX = 210+(i-33)*10;
-    craneY = 420-(i-33)*6;
+    craneX = 235+(i-30)*20;
+    craneY = 410-(i-30)*12;
     craneHeadR  = radians(-84)+cos(radians(i))*.1;
     craneLegR =0;
   }
@@ -101,14 +101,16 @@ void drawAllTheHouse() {
     dy2= dy2 - dvy;
     dw= dw - dvw;
     dwx= dwx - dvxw;
-    craneX = -1000;
-    craneY= -1000;
   }
   if (clickBabyBag == true) {
     parentCounter++;
-    gator();
+    if (parentCounter<6 && parentCounter>2){
+    gatorHeadR = radians(parentCounter*4);
+    }
+    gator(gatorHeadR);
     bagX=5000;
     bagY=5000;
+    println(parentCounter);
   }
   if (dx <= 210) {
     dvx=0;
