@@ -1,3 +1,4 @@
+//Interactive Animation by Bonita Galvan, Ben Troller, Sam Chase and Audrey Gerughty
 color darkC = color(150, 150, 150);
 color lightC = color(211, 211, 211);
 int clouds = 10;
