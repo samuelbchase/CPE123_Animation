@@ -1,4 +1,6 @@
-float catx, catvx, caty, catvy;
+float catx, catvx, caty, catvy, parentSize, parentsy, parentsvy;
+float lowerRightArm, RightArm, lowerLeftArm, LeftArm;
+boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
 
 void setup() {
   size(600, 600);
@@ -6,14 +8,68 @@ void setup() {
   caty=600;
   catvy=-4;
   catvx=-.5;
+  parentSize=1;
+  parentsy=300;
+  parentsvy=.2;
 }
 
 void draw() {
   background(#043152);
-  drawWomenHead();
-  drawManHead();
+  drawParentsScared();
+}
+
+
+void drawParentsScared() {
+  if (LeftArm > radians(90)) {
+    LeftArmR = true;
+  }
+
+  if (LeftArmR == true) {
+    LeftArm = radians(90);
+  } else {
+    LeftArm += .05;
+  }
+
+  if (lowerLeftArm > radians(120)) {
+    lowerLeftArmR = true;
+  }
+
+  if (lowerLeftArmR == true) {
+    lowerLeftArm = radians(120);
+  } else {
+    lowerLeftArm += .06;
+  }
+
+
+  if (RightArm < radians(-90)) {
+    RightArmR = true;
+  }
+  if
+    (RightArmR == true) {
+    RightArm = radians(-90);
+  } else {
+    RightArm -= .05;
+  }
+
+  if (lowerRightArm > radians(-120)) {
+    lowerRightArmR = true;
+  }
+
+  if (lowerRightArmR == true) {
+    lowerRightArm = radians(-120);
+  } else {
+    lowerRightArm -= .06;
+  }
+
+  drawAHHH();
+  parentsy=parentsy+parentsvy;
+  parentSize=parentSize*1.001;
   catx=catx+catvx;
   caty=caty+catvy;
+  if (parentSize>=1.5) {
+    parentSize=1.5;
+    parentsvy=0;
+  }
   if (caty<=400) {
     catvy=catvy*-1;
     catvx=-1;
@@ -22,11 +78,22 @@ void draw() {
 }
 
 
+
+void drawAHHH() { //void draw scared parents 
+  pushMatrix();
+  translate(300, parentsy);
+  scale(parentSize);
+  translate(-300, -300);
+  drawManHead();
+  drawWomenHead();
+  popMatrix();
+}
+
 void drawWomenHead() {
   pushMatrix();
-  translate(450, 270);
+  translate(350, 270);
   scale(2);
-  translate(-175, -90);
+  translate(-145, -90);
   noStroke();
   fill(#5F1B10);
   ellipse(175, 65, 100, 100); // hair
@@ -39,10 +106,6 @@ void drawWomenHead() {
   rect(165, 80, 20, 45, 10);//neck shadow
   fill(#F5C18D);
   ellipse(175, 70, 80, 90); //Whead
-  quad(137, 150, 155, 150, 150, 210, 142, 210); //right arm
-  quad(215, 150, 200, 150, 202, 210, 210, 210); //left arm 
-  ellipse(146, 220, 15, 25);//hands 
-  ellipse(206, 220, 15, 25);
   fill(0);
   arc(175, 55, 80, 60, radians(180), radians(360)); // hairband
   fill(#5F1B10);
@@ -98,13 +161,58 @@ void drawWomenHead() {
   popMatrix();
   fill(#810C14);
   quad(150, 130, 200, 130, 190, 200, 160, 200);//chest
+
+
+  pushMatrix();
+  translate(145, 140);
+  rotate(LeftArm);
+  translate(-145, -140);
+  fill(255, 0, 0);
+  fill(#810C14);
   ellipse(145, 140, 20, 30); //Left sleeve
-  ellipse(205, 140, 20, 30); //rightSleeve
-  ellipse(175, 230, 70, 70); //hips
-  quad(210, 230, 140, 230, 130, 300, 220, 300); //skirt
+  fill(#F5C18D);
+  quad(137, 150, 155, 150, 153, 180, 140, 180);//left upper arm
+  ellipse(146.5, 180, 13, 30);//elbow
+  pushMatrix();
+  translate(140, 180);
+  rotate(lowerLeftArm);
+  translate(-140, -180);
+  fill(#F5C18D);
+  quad(140, 180, 153, 180, 150, 210, 142, 210); //left lower arm
+  ellipse(146.5, 180, 13, 30); //elbow
+  ellipse(146, 220, 15, 25);// left hand 
+  popMatrix();
   fill(255);
   rect(135, 145, 20, 10, 0, 0, 10, 10); //left sleeve white 
-  rect(195, 145, 20, 10, 0, 0, 10, 10); //left sleeve white 
+  popMatrix();
+
+  pushMatrix();
+  translate(205, 140);
+  rotate(RightArm);
+  translate(-205, -140);
+  fill(#810C14);
+  ellipse(205, 140, 20, 30); //rightSleeve
+  fill(#F5C18D);
+  quad(215, 150, 200, 150, 201, 180, 214, 180); //upper right arm
+  ellipse(207.5, 180, 13, 25);
+  pushMatrix();
+  translate(212, 180);
+  rotate(lowerRightArm);
+  translate(-212, -180);
+  fill(#F5C18D);
+  quad(214, 180, 201, 180, 202, 210, 210, 210); //lower right arm 
+  ellipse(207.5, 180, 13, 25);
+  ellipse(206, 220, 15, 30); //right hand 
+  popMatrix();
+  fill(255);
+  rect(195, 145, 20, 10, 0, 0, 10, 10); //right sleeve white
+  popMatrix();
+
+
+
+  fill(#810C14);
+  ellipse(175, 230, 70, 70); //hips
+  quad(210, 230, 140, 230, 130, 300, 220, 300); //skirt
   fill(#550308, 100);
   ellipse(175, 155, 50, 40); //underboobs
   fill(#810C14);
@@ -125,8 +233,9 @@ void drawWomenHead() {
 
 
 void drawManHead() {
+  noStroke();
   pushMatrix();
-  translate(150, 200);
+  translate(190, 200);
   scale(2);
   translate(-75, -80);
   fill(#A06741);

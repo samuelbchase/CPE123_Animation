@@ -13,7 +13,7 @@ int end = 1;
 int secondaryCounter = 1;
 int i = 0;
 float craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
-float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
+float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize;
 
 
 void setup() {
