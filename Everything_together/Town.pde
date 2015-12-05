@@ -1,7 +1,7 @@
 //town
 float HouseCounter = 0;
 int colorcount;
-color[] bar = new color[600000000];
+color[] bar = new color[60000];
 
 void drawLawn()
 {
@@ -15,7 +15,7 @@ void drawLawn()
 
 void setupColor()
 {
-for( int i = 0; i < 600000000; i++)
+for( int i = 0; i < 60000; i++)
 {
  if(i % 3 ==0)
  {
@@ -38,7 +38,7 @@ void drawHouses()
     pushMatrix();
     translate(-HouseCounter,0);
     pushMatrix(); //house base
-    fill(bar[colorcount]);
+    fill(color(0,0,128));
     translate(i,500);
     rect(0,0,50,50);
     
