@@ -22,7 +22,7 @@ void setup() {
   wingScale = 0;
   smooth();
   prepGround();
-  setupColor();
+  //setupColor();
   clickDoor = false;
   for (int i=0; i<clouds; i++) {
     cloudx[i]= random(0, width);
