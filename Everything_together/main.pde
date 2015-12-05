@@ -173,9 +173,9 @@ void craneFlying() {
     wingScale = 170;
   }
   if (flyingCounter < 180 + 170) {
-    craneX++;
+    craneX+=10;
   } else if (mouseWasClicked >= 1) {
-    craneX++;
+    craneX+=10;
   }
   craneY = 200+ 10*cos(radians(flyingCounter));
   craneR = cos(radians(flyingCounter))*.1;

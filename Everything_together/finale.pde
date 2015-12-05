@@ -14,9 +14,12 @@ color[] foo;
 float catx, catvx, caty, catvy, parentSize, parentsy, parentsvy;
 float lowerRightArm, RightArm, lowerLeftArm, LeftArm;
 boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
+PImage theEnd;
+int creditsCount;
+float creditsY=0;
 
 void mousePressed() {
-  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50){
+  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50) {
     clickDoor = true;
   }
   if (clickDoor ==true && (mouseX-300)*(mouseX-300) + (mouseY-490)*(mouseY-490) - 1600 <0) {
@@ -59,6 +62,16 @@ void drawAllTheHouse() {
   }
   if (parentCounter>=20) {
     drawAHHH();
+  }
+  if (parentCounter>=60) {
+    drawCredits(creditsY);
+    if (parentCounter>=70 && parentCounter<=190) {
+      creditsY=creditsY-10;
+    }
+    if (creditsY==-1200) {
+      creditsY=0;
+    }
+    drawCredits(creditsY);
   }
 }
 
@@ -366,14 +379,14 @@ void prepGround()
 {
   i = 0;
   foo = new color[600*600];
-  for(int i =0; i < 600*600; i++)
+  for (int i =0; i < 600*600; i++)
   {
     foo[i] = color(random(20, 50), random(80, 200), random(0, 30));
   }
 }
 void drawGround() {
   /*fill(#1C853C);
-  rect(0, 470, 600, 200);*/
+   rect(0, 470, 600, 200);*/
 
   i=0;
   for (int x=-10; x< width; x+=random (2, 5)) {
@@ -528,8 +541,8 @@ void drawParents() {
 
 void drawScaredParents() {
   fill(#043152);
-  rect(0,0,600,600);
- pushMatrix();
+  rect(0, 0, 600, 600);
+  pushMatrix();
   translate(300, parentsy);
   scale(parentSize);
   translate(-300, -300);
@@ -644,14 +657,14 @@ void drawWomenHead() {
   ellipse(205, 140, 20, 30); //rightSleeve
   fill(#F5C18D);
   quad(215, 150, 200, 150, 201, 180, 214, 180); //upper right arm
-  ellipse(207.5,180,13,25);
+  ellipse(207.5, 180, 13, 25);
   pushMatrix();
   translate(212, 180);
   rotate(lowerRightArm);
   translate(-212, -180);
   fill(#F5C18D);
   quad(214, 180, 201, 180, 202, 210, 210, 210); //lower right arm 
-  ellipse(207.5,180,13,25);
+  ellipse(207.5, 180, 13, 25);
   ellipse(206, 220, 15, 30); //right hand 
   popMatrix();
   fill(255);
