@@ -40,7 +40,7 @@ void drawDesertScene() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]));
+    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
   }
   stroke(0);
   strokeWeight(1);

@@ -69,7 +69,7 @@ void setup() {
   }
   //TREE STUFF
   for (int i = 0; i < randomTreeHeights.length; i++) {
-    randomTreeHeights[i] = random(0, 300);
+    randomTreeHeights[i] = random(0, 30);
     randomTreeOffsets[i] = random(-10, 10);
     treeColor[i] = color(random(0, 60), random(50, 150), random(0, 60));
   }
