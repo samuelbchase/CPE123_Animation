@@ -16,6 +16,7 @@ int i = 0;
 float craneX, craneY, craneR, craneHeadR, craneNeckR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
 float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
 int houseCounter = 0;
+color houseColor[] = new color [60000];
 
 void setup() {
   size(600, 600);
@@ -23,8 +24,6 @@ void setup() {
   smooth();
   prepGround();
   //setupColor();
-  theEnd = loadImage("TheEnd.png");
-  theEnd.loadPixels();
   clickDoor = false;
   for (int i=0; i<clouds; i++) {
     cloudx[i]= random(0, width);
@@ -44,7 +43,7 @@ void setup() {
   parentSize=1;
   parentsy=300;
   parentsvy=.4;
-  
+
   noStroke();  
   for (int i = 0; i < numberOfCacti; i++) {
     if (i > 0) {
@@ -54,7 +53,7 @@ void setup() {
   for (int i = 0; i < numberOfCacti; i++) {
     cactusHeight[i] = random(600, 3000);
   }
-  for (int i = 0; i < numberOfCacti; i++) {
+   for (int i = 0; i < numberOfCacti; i++) {
     cactusScale[i] = random(0.1, 0.13);
   }
   for (int i = 0; i < 100; i++) {
@@ -72,8 +71,14 @@ void setup() {
   for (int i = 0; i < randomTreeHeights.length; i++) {
     randomTreeHeights[i] = random(0, 300);
     randomTreeOffsets[i] = random(-10, 10);
+    treeColor[i] = color(random(0, 60), random(50, 150), random(0, 60));
+  }
+  for (int i = 0; i < 60000; i++) {
+    houseColor[i] = color(random(70, 210), random(50, 240), random(80, 230));
   }
   setupCity();
+  theEnd = loadImage("TheEnd.png");
+  theEnd.loadPixels();
 }
 
 void draw() {
@@ -216,17 +221,17 @@ void draw() {
       craneHeadR = (radians(-10)- (radians(houseCounter-25))*-4);
       bagX = 300;//should be ~300, 490 at end
       bagY = 428.8+9.8*(houseCounter-18);
-    } else if (houseCounter<35) {
+    } else if (houseCounter<30) {
       //crane rotates from standing to flying position
-      /* if (i % 2 == 0) {
-       wingScale = 50;
-       } else {
-       wingScale = 170;
-       }*/
-      craneX = 210;
-      craneY = 420;
-      craneR = radians(280)+ 4*(radians(houseCounter-25));
-      craneHeadR  = radians(-10)- 4*(radians(houseCounter-25));
+      if (houseCounter % 2 == 0) {
+        wingScale = 50;
+      } else {
+        wingScale = 170;
+      }
+      craneX = 210+(houseCounter-25)*5;
+      craneY = 420-(houseCounter-25)*2;
+      craneR = radians(280)+ 8*(radians(houseCounter-25));
+      craneHeadR  = radians(-10)- 8*(radians(houseCounter-25));
     } else if (houseCounter<133) {
       //crane flying
       if (houseCounter % 2 == 0) {
@@ -234,8 +239,8 @@ void draw() {
       } else {
         wingScale = 170;
       }
-      craneX = 210+(houseCounter-33)*10;
-      craneY = 420-(houseCounter-33)*6;
+      craneX = 235+(houseCounter-30)*20;
+      craneY = 410-(houseCounter-30)*12;
       craneHeadR  = radians(-84)+cos(radians(houseCounter))*.1;
       craneLegR =0;
     }

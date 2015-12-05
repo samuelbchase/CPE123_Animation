@@ -23,6 +23,7 @@ int forestTreeX = 0;
 int treeCounter = 0;
 float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
+color treeColor[] = new color [300];
 
 
 void drawDesertScene() {
@@ -39,7 +40,7 @@ void drawDesertScene() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
+    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]));
   }
   stroke(0);
   strokeWeight(1);
@@ -173,9 +174,9 @@ void craneFlying() {
     wingScale = 170;
   }
   if (flyingCounter < 180 + 170) {
-    craneX+=10;
+    craneX++;
   } else if (mouseWasClicked >= 1) {
-    craneX+=10;
+    craneX++;
   }
   craneY = 200+ 10*cos(radians(flyingCounter));
   craneR = cos(radians(flyingCounter))*.1;
@@ -338,7 +339,7 @@ void setupCity()
     SamCityWidths[i] = 20 + int(random(0, 30));
     SamCityDistBetween[i] = 50 + int(random(0, 10));
     SamCityRoofs[i] = 3 + int(random(0, 30));
-    if(SamCityRoofs[i] < SamCityWidths[i])
+    if (SamCityRoofs[i] < SamCityWidths[i])
     {
       SamCityRoofs[i] = SamCityWidths[i]-5;
     }
@@ -346,7 +347,7 @@ void setupCity()
   for (int i = 0; i < 600; i++) {
     starYPositions[i] = random(0, 600);
   }
-    for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 20; i++) {
     roadStripePositions[i] = 2*i * 620/40;
   }
 }
@@ -363,8 +364,8 @@ void drawBuilding(int i, int x)
   popMatrix();
 }
 
-void treeMaker(float treeHeight, float treeOffset) //this makes lots of trees
-{
+
+void treeMaker(float treeHeight, float treeOffset, color treeColor) { //this makes lots of trees
   pushMatrix();
   noStroke();
   translate(forestTreeX + treeOffset, 600 - treeHeight);
@@ -372,12 +373,12 @@ void treeMaker(float treeHeight, float treeOffset) //this makes lots of trees
   fill(#5E2605);
   rect(0, treeHeight, 10, -treeHeight - 50);
   pushMatrix();
-  fill(#006400);
+  fill(treeColor);
   translate(5, -20);
-  triangle(-20, 0, 0, -20, 20, 0);  
+  triangle(-40, 0, 0, -40, 40, 0);  
   for (int i = 0; i < treeHeight/10 + 1; i++) {
-    translate(0, -10);
-    triangle(-20, 0, 0, -20, 20, 0);
+    translate(0, -12);
+    triangle(-40+i, 0, 0, -40+i, 40-i, 0);
   }
   //translate(0, -10);
   //triangle(-20, 0, 0, -20, 20, 0);  
@@ -416,7 +417,7 @@ void drawForestScene() {
   translate(-treeCounter*2, 0);
   for (int i = 0; i < 300; i++)
   {
-    treeMaker(randomTreeHeights[i], randomTreeOffsets[i]);
+    treeMaker(randomTreeHeights[i], randomTreeOffsets[i], treeColor[i]);
   }
   popMatrix();
   treeCounter++;
