@@ -71,7 +71,7 @@ void setup() {
 }
 
 void draw() {
-  if (i < 1350) {
+  if (i < 860) {
     background(#65B5F5); 
     noStroke();
     for (int i=0; i<clouds; i++) {
@@ -146,7 +146,7 @@ void draw() {
       } else {
         wingScale = 170;
       }
-      craneX = 150+end/2;
+      craneX = 150+(i-260);
       craneY = 300+ 10*cos(radians(end));
       craneR = cos(radians(end))*.1;
       craneHeadR  = radians(-84)+cos(radians(end))*.1;
