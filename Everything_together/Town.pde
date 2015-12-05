@@ -12,26 +12,6 @@ void drawLawn()
  rect(0,0,600,75);
  popMatrix();
 }
-/*
-void setupColor()
-{
-for( int i = 0; i < 60000; i++)
-{
- if(i % 3 ==0)
- {
-   bar[i] = color(0,0,128);
- }
- else if(i % 3 ==1)
- {
-   bar[i] = color(#cc0909);
- }
- else
- {
-   bar[i] = color(#377c0c);
- }
-}
-} 
-*/
 void drawHouses()
 {
   for(int i = 15; i < 600*100; i += 75)
