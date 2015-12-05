@@ -11,8 +11,12 @@ int parentCounter=1;
 boolean clickDoor;
 boolean clickBabyBag;
 color[] foo;
+float catx, catvx, caty, catvy, parentSize, parentsy, parentsvy;
+float lowerRightArm, RightArm, lowerLeftArm, LeftArm;
+boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
+
 void mousePressed() {
-  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460 ) {
+  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50){
     clickDoor = true;
   }
   if (clickDoor ==true && (mouseX-300)*(mouseX-300) + (mouseY-490)*(mouseY-490) - 1600 <0) {
@@ -54,7 +58,7 @@ void drawAllTheHouse() {
     dvw=0;
   }
   if (parentCounter>=20) {
-    drawScaredParents();
+    drawAHHH();
   }
 }
 
@@ -525,16 +529,21 @@ void drawParents() {
 void drawScaredParents() {
   fill(#043152);
   rect(0,0,600,600);
-  drawWomenHead();
+ pushMatrix();
+  translate(300, parentsy);
+  scale(parentSize);
+  translate(-300, -300);
   drawManHead();
+  drawWomenHead();
+  popMatrix();
 }
 
 
 void drawWomenHead() {
   pushMatrix();
-  translate(450, 270);
-  scale(3.4);
-  translate(-175, -70);
+  translate(350, 270);
+  scale(2);
+  translate(-145, -90);
   noStroke();
   fill(#5F1B10);
   ellipse(175, 65, 100, 100); // hair
@@ -547,8 +556,6 @@ void drawWomenHead() {
   rect(165, 80, 20, 45, 10);//neck shadow
   fill(#F5C18D);
   ellipse(175, 70, 80, 90); //Whead
-  quad(137, 150, 155, 150, 150, 210, 142, 210); //right arm
-  quad(215, 150, 200, 150, 202, 210, 210, 210); //left arm 
   fill(0);
   arc(175, 55, 80, 60, radians(180), radians(360)); // hairband
   fill(#5F1B10);
@@ -604,24 +611,86 @@ void drawWomenHead() {
   popMatrix();
   fill(#810C14);
   quad(150, 130, 200, 130, 190, 200, 160, 200);//chest
+
+
+  pushMatrix();
+  translate(145, 140);
+  rotate(LeftArm);
+  translate(-145, -140);
+  fill(255, 0, 0);
+  fill(#810C14);
   ellipse(145, 140, 20, 30); //Left sleeve
-  ellipse(205, 140, 20, 30); //rightSleeve
+  fill(#F5C18D);
+  quad(137, 150, 155, 150, 153, 180, 140, 180);//left upper arm
+  ellipse(146.5, 180, 13, 30);//elbow
+  pushMatrix();
+  translate(140, 180);
+  rotate(lowerLeftArm);
+  translate(-140, -180);
+  fill(#F5C18D);
+  quad(140, 180, 153, 180, 150, 210, 142, 210); //left lower arm
+  ellipse(146.5, 180, 13, 30); //elbow
+  ellipse(146, 220, 15, 25);// left hand 
+  popMatrix();
   fill(255);
   rect(135, 145, 20, 10, 0, 0, 10, 10); //left sleeve white 
-  rect(195, 145, 20, 10, 0, 0, 10, 10); //left sleeve white 
+  popMatrix();
+
+  pushMatrix();
+  translate(205, 140);
+  rotate(RightArm);
+  translate(-205, -140);
+  fill(#810C14);
+  ellipse(205, 140, 20, 30); //rightSleeve
+  fill(#F5C18D);
+  quad(215, 150, 200, 150, 201, 180, 214, 180); //upper right arm
+  ellipse(207.5,180,13,25);
+  pushMatrix();
+  translate(212, 180);
+  rotate(lowerRightArm);
+  translate(-212, -180);
+  fill(#F5C18D);
+  quad(214, 180, 201, 180, 202, 210, 210, 210); //lower right arm 
+  ellipse(207.5,180,13,25);
+  ellipse(206, 220, 15, 30); //right hand 
+  popMatrix();
+  fill(255);
+  rect(195, 145, 20, 10, 0, 0, 10, 10); //right sleeve white
+  popMatrix();
+
+
+
+  fill(#810C14);
+  ellipse(175, 230, 70, 70); //hips
+  quad(210, 230, 140, 230, 130, 300, 220, 300); //skirt
   fill(#550308, 100);
   ellipse(175, 155, 50, 40); //underboobs
   fill(#810C14);
   ellipse(175, 150, 60, 40); //boobs
+  fill(255);
+  triangle(160, 130, 175, 130, 170, 140); //collar
+  triangle(175, 130, 190, 130, 180, 140); //collar
+  fill(#5A1109);
+  quad(155, 195, 197, 190, 197, 200, 155, 200);//belt
+  fill(0);
+  quad(155, 300, 175, 300, 170, 360, 160, 360); //right leg
+  quad(175, 300, 195, 300, 190, 360, 180, 360); //left leg 
+  fill(#E8BF17);
+  rect(158, 360, 14, 10, 10, 10, 0, 0); //left shoe
+  rect(178, 360, 14, 10, 10, 10, 0, 0); //right shoe
   popMatrix();
 }
 
 
 void drawManHead() {
+  noStroke();
   pushMatrix();
-  translate(150, 200);
-  scale(3.4);
-  translate(-75, -60);
+  translate(190, 200);
+  scale(2);
+  translate(-75, -80);
+  fill(#A06741);
+  ellipse(48, 235, 15, 25);//hands 
+  ellipse(103, 235, 15, 25);
   fill(255);
   quad(45, 115, 105, 115, 95, 200, 55, 200);//chest
   quad(37, 115, 55, 115, 52, 230, 42, 230); //right arm
@@ -635,7 +704,20 @@ void drawManHead() {
   quad(50, 115, 65, 115, 75, 125, 65, 130); //collar
   quad(85, 115, 100, 115, 85, 130, 75, 125); //collar
   noStroke();
+  noStroke();
+  fill(0);
+  quad(55, 210, 75, 210, 74, 360, 58, 360); //right leg
+  quad(75, 210, 95, 210, 90, 360, 76, 360); //left leg 
+  fill(#4D120B);
+  rect(50, 200, 50, 10); //belt 
+  rect(55, 358, 20, 12, 10, 10, 0, 0); //left shoe
+  rect(75, 358, 20, 12, 10, 10, 0, 0); //right shoe
+  stroke(#E8BF17);
+  strokeWeight(3);
+  noFill();
+  rect(70, 200, 10, 10);
   fill(#240703);
+  noStroke();
   ellipse(75, 50, 90, 90); //hair
   fill(#A06741);
   rect(65, 80, 20, 35);//neck
@@ -675,4 +757,123 @@ void drawManHead() {
   fill(#64322B, 100);
   ellipse(75, 57, 7, 15); //nose
   popMatrix();
+}
+
+void drawCat(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  scale(1.5);
+  translate(-50, -70);
+  noStroke();
+  strokeWeight(5);
+  stroke(#F2720F);
+  noFill();
+  arc(105, 62, 30, 20, radians(180), radians(360));
+  noStroke();
+  fill(#F2720F);
+  beginShape(); //head
+  vertex(30, 20);
+  vertex(70, 20);
+  vertex(70, 65);
+  vertex(45, 65);
+  vertex(30, 50);
+  endShape();
+  rect(69, 30, 22, 36);//body
+  rect(89, 30, 32, 25);
+  rect(119, 30, 22, 36);
+  quad(70, 65, 92, 65, 84, 100, 78, 100);//left leg
+  quad(118, 65, 140, 65, 121, 100, 115, 100); //right leg
+  ellipse(76, 97, 12, 6);//paws
+  ellipse(113, 97, 12, 6);
+  beginShape(); //tail
+  vertex(140, 65);
+  vertex(140, 10);
+  vertex(148, 20);
+  vertex(150, -10);
+  vertex(158, 0);
+  vertex(164, -30);
+  vertex(168, 0);
+  vertex(180, -10);
+  vertex(165, 25);
+  vertex(180, 20);
+  // vertex(30,
+  endShape();
+  ellipse(105, 30, 70, 30);
+  triangle(30, 20, 40, 20, 30, 5); //ears
+  triangle(60, 20, 70, 20, 70, 5);
+  fill(255);
+  ellipse(43, 40, 10, 10);//eyes
+  ellipse(57, 40, 15, 15);
+  fill(0);
+  ellipse(43, 40, random(2, 4), random(2, 4));//pupils
+  ellipse(57, 40, random(6, 8), random(6, 8));
+  fill(#FA5DD8);
+  triangle(45, 50, 55, 50, 50, 56);//nose
+  stroke(0);
+  strokeWeight(2);
+  line (20, 45, 45, 50);//whiskers
+  line (20, 50, 45, 50);
+  line (20, 55, 45, 50);
+  line (80, 45, 55, 50);
+  line (80, 50, 55, 50);
+  line (80, 55, 55, 50); 
+  popMatrix();
+}
+
+void drawAHHH() {
+  if (LeftArm > radians(90)) {
+    LeftArmR = true;
+  }
+
+  if (LeftArmR == true) {
+    LeftArm = radians(90);
+  } else {
+    LeftArm += .5;
+  }
+
+  if (lowerLeftArm > radians(120)) {
+    lowerLeftArmR = true;
+  }
+
+  if (lowerLeftArmR == true) {
+    lowerLeftArm = radians(120);
+  } else {
+    lowerLeftArm += .6;
+  }
+
+
+  if (RightArm < radians(-90)) {
+    RightArmR = true;
+  }
+  if
+    (RightArmR == true) {
+    RightArm = radians(-90);
+  } else {
+    RightArm -= .5;
+  }
+
+  if (lowerRightArm > radians(-120)) {
+    lowerRightArmR = true;
+  }
+
+  if (lowerRightArmR == true) {
+    lowerRightArm = radians(-120);
+  } else {
+    lowerRightArm -= .6;
+  }
+
+  drawScaredParents();
+  parentsy=parentsy+parentsvy;
+  parentSize=parentSize*1.05;
+  catx=catx+catvx;
+  caty=caty+catvy;
+  if (parentSize>=1.5) {
+    parentSize=1.5;
+    parentsvy=0;
+  }
+  if (caty<=400) {
+    catvy=catvy*-1;
+    catvx=-1;
+  }
+  drawCat(catx, caty);
 }
