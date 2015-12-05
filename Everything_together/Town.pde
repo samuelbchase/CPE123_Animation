@@ -1,7 +1,7 @@
 //town
 float HouseCounter = 0;
 int colorcount;
-color[] bar = new color[60000];
+//color[] bar = new color[60000];
 
 void drawLawn()
 {
@@ -12,7 +12,7 @@ void drawLawn()
  rect(0,0,600,75);
  popMatrix();
 }
-
+/*
 void setupColor()
 {
 for( int i = 0; i < 60000; i++)
@@ -30,7 +30,8 @@ for( int i = 0; i < 60000; i++)
    bar[i] = color(#377c0c);
  }
 }
-}
+} 
+*/
 void drawHouses()
 {
   for(int i = 15; i < 600*100; i += 75)
