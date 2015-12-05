@@ -4,6 +4,7 @@ float cactusX[] = new float[numberOfCacti];
 float cactusY = 150;
 int shaleCounter = 0;
 float shaleHeight[] = new float[100];
+float cactusScale[] = new float [numberOfCacti];
 
 void setup() {
   size(600, 600);
@@ -13,10 +14,13 @@ void setup() {
     }
   }
   for (int i = 0; i < numberOfCacti; i++) {
-    cactusHeight[i] = random(600, 4000);
+    cactusHeight[i] = random(600, 3000);
   }
   for (int i = 0; i < 100; i++) {
     shaleHeight[i] = random(100, 300);
+  }
+  for (int i = 0; i < numberOfCacti; i++) {
+    cactusScale[i] = random(0.1, 0.13);
   }
 }
 
@@ -41,7 +45,7 @@ void draw() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], 0.1);
+    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
   }
   stroke(0);
   strokeWeight(1);
