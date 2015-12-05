@@ -336,7 +336,11 @@ void setupCity()
     SamCityHeights[i] = 200 + int(random(0, 300));
     SamCityWidths[i] = 20 + int(random(0, 30));
     SamCityDistBetween[i] = 50 + int(random(0, 10));
-    SamCityRoofs[i] = 30 + int(random(0, 30));
+    SamCityRoofs[i] = 3 + int(random(0, 30));
+    if(SamCityRoofs[i] < SamCityWidths[i])
+    {
+      SamCityRoofs[i] = SamCityWidths[i]-5;
+    }
   }
   for (int i = 0; i < 600; i++) {
     starYPositions[i] = random(0, 600);
