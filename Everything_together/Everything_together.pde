@@ -37,8 +37,8 @@ void setup() {
   craneX = -170;
   catx=250;
   caty=600;
-  catvy=-8;
-  catvx=-1;
+  catvy=-18;
+  catvx=-2;
   parentSize=1;
   parentsy=300;
   parentsvy=.4;
