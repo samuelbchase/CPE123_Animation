@@ -4,6 +4,7 @@ float cactusX[] = new float[numberOfCacti];
 float cactusY = 150;
 int shaleCounter = 0;
 float shaleHeight[] = new float[100];
+float cactusScale[] = new float [numberOfCacti];
 
 int mouseWasClicked = 0;
 int flyingCounter = 1;
@@ -38,7 +39,7 @@ void drawDesertScene() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], 0.1);
+    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
   }
   stroke(0);
   strokeWeight(1);

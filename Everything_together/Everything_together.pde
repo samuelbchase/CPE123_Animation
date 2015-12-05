@@ -52,6 +52,9 @@ void setup() {
   for (int i = 0; i < numberOfCacti; i++) {
     cactusHeight[i] = random(600, 3000);
   }
+  for (int i = 0; i < numberOfCacti; i++) {
+    cactusScale[i] = random(0.1, 0.13);
+  }
   for (int i = 0; i < 100; i++) {
     if (i == 0) {
       shaleHeight[i] = random(100, 300);
