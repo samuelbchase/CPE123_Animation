@@ -6,8 +6,8 @@ int shaleCounter = 0;
 float shaleHeight[] = new float[100];
 float cactusScale[] = new float [numberOfCacti];
 
-int tumbleWeedX = 0;
-int tumbleWeedRotate = 0;
+float tumbleWeedX = 0;
+float tumbleWeedRotate = 0;
 float tumbleWeedRadius[] = new float[20];
 float tumbleWeedOffset[] = new float[20];
 
@@ -39,9 +39,8 @@ void setup() {
 
 void draw() {
   background(244, 209, 138);
-  //rect(200 - shaleCounter, 200, 200, 400);
-  //rect(600 - shaleCounter, 200, 400, 400);
   fill(71, 24, 106);
+
   pushMatrix();
   translate(-shaleCounter, 0);
   beginShape();
@@ -52,6 +51,7 @@ void draw() {
   vertex(400, 6*600);
   endShape(CLOSE);
   popMatrix();
+
   for (int i = 0; i < numberOfCacti; i++) {
     drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
   }
@@ -64,13 +64,14 @@ void draw() {
   fill(225, 126, 53);
   rect(0, 580, width, 20);
 
+  //tumbleweeds
   for (int i = 0; i < 20; i++) {
     if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
       drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
     }
   }
-  tumbleWeedX += 1.7;
-  tumbleWeedRotate += 2;
+  tumbleWeedX += 4;
+  tumbleWeedRotate += 12;
 }
 
 void drawACactus(float x, float y, float scale) {
