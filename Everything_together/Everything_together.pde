@@ -33,7 +33,14 @@ void setup() {
   cloudmanvy=-.1;
   cloudmanSize=1;
   craneX = -170;
-
+  catx=250;
+  caty=600;
+  catvy=-8;
+  catvx=-1;
+  parentSize=1;
+  parentsy=300;
+  parentsvy=.4;
+  
   noStroke();  
   for (int i = 0; i < numberOfCacti; i++) {
     if (i > 0) {
@@ -171,7 +178,6 @@ void draw() {
 
     craneFlying();
 
-    //i++;
     if (craneX > 750 ) {
       craneX = -170;
     }
