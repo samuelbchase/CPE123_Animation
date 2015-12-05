@@ -8,8 +8,8 @@ float cactusScale[] = new float [numberOfCacti];
 
 int tumbleWeedX = 0;
 int tumbleWeedRotate = 0;
-float tumbleWeedRadius[] = new float[5]; //random(20, 30);
-float tumbleWeedOffset[] = new float[5];
+float tumbleWeedRadius[] = new float[20];
+float tumbleWeedOffset[] = new float[20];
 
 void setup() {
   size(600, 600);
@@ -27,7 +27,7 @@ void setup() {
   for (int i = 0; i < numberOfCacti; i++) {
     cactusScale[i] = random(0.1, 0.13);
   }
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 20; i++) {
     if (i == 0) {
       tumbleWeedOffset[i] = 0;
     } else {
@@ -49,11 +49,6 @@ void draw() {
   for (int i = 0; i < 100; i++) {
     vertex(80*i + shaleHeight[i]/20, shaleHeight[i]);
   }
-  //vertex(0, 600);
-  //vertex(0, random(100, 300));
-  //vertex(200, random(100, 300));
-  //vertex(random(100, 300), 600);
-  //vertex(0, 600);
   vertex(400, 6*600);
   endShape(CLOSE);
   popMatrix();
@@ -64,20 +59,18 @@ void draw() {
   strokeWeight(1);
   cactusPositionUpdate();
   shaleCounter++;
-  
+
   //ground
   fill(225, 126, 53);
   rect(0, 580, width, 20);
-  
-  //tumbleweed
-  for (int i = 0; i < 5; i++) {
+
+  for (int i = 0; i < 20; i++) {
     if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
       drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
     }
-    //drawTumbleWeed(tumbleWeedX, radians(tumbleWeedRotate), tumbleWeedRadius);
-    tumbleWeedX += 2;
-    tumbleWeedRotate += 2;
   }
+  tumbleWeedX += 1.7;
+  tumbleWeedRotate += 2;
 }
 
 void drawACactus(float x, float y, float scale) {
@@ -195,4 +188,14 @@ void drawTumbleWeed(float tumbleWeedX, float tumbleWeedRotate, float tumbleWeedS
     ellipse(xc, yc, tumbleWeedScale/20, tumbleWeedScale/20);
   }
   popMatrix();
+}
+
+void drawAllTumbleWeeds() {
+  for (int i = 0; i < 20; i++) {
+    if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
+      drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
+    }
+  }
+  tumbleWeedX += 1.7;
+  tumbleWeedRotate += 2;
 }
