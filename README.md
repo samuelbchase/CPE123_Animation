@@ -19,3 +19,4 @@ List of things to do:
 * Change grass (again?) (Ben)
 * Add tumbleweed to desert scene (Ben)
 * Add wings to standing crane (Audrey)
+* Change position that crane stops and waits for click
