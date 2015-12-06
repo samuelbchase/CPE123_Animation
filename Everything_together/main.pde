@@ -28,11 +28,11 @@ color treeColor[] = new color [300];
 
 void drawDesertScene() {
   background(244, 209, 138);
-   for (int i=0; i<clouds; i++) {
-      drawCloud(cloudx[i]-width, cloudy[i], cloudSize[i]);
-    }
-  fill(244, 209, 138,80);
-  rect(0,0,600,600);
+  for (int i=0; i<clouds; i++) {
+    drawCloud(cloudx[i]-width, cloudy[i], cloudSize[i]);
+  }
+  fill(244, 209, 138, 80);
+  rect(0, 0, 600, 600);
   fill(71, 24, 106);
   pushMatrix();
   translate(-shaleCounter, 0);
@@ -220,10 +220,19 @@ void setupCity()
 
 void drawBuilding(int i, int x)
 {
-  fill(123, 144, 149);
+  fill(#5D6571);
   pushMatrix();  
-  translate(SamCityDistBetween[i]+ 60*i - x - 20, 600);
+  translate(SamCityDistBetween[i]+ 70*i - x - 20, 550);
   rect(0, 0, SamCityWidths[i], -SamCityHeights[i]);
+  fill(#323840);
+  quad(0+SamCityWidths[i], 0, 0+SamCityWidths[i], -SamCityHeights[i], 15+SamCityWidths[i], -SamCityHeights[i]+20, 15+SamCityWidths[i], 0);
+  for (int w=0; w<2; w++) {
+    for (int y=0; y<12; y++) {
+      fill(#F1FCAB);
+      rect(SamCityWidths[i]/5+w*SamCityWidths[i]/3, -10-y*SamCityHeights[i]*.08, SamCityWidths[i]/5, -SamCityHeights[i]*.05);
+    }
+  }
+  fill(#5D6571);
   translate(SamCityWidths[i]/2, -SamCityHeights[i]);
   triangle(-SamCityRoofs[i]/2, 0, SamCityRoofs[i]/2, 0, 0, -20);
   line(0, -20, 0, -15+random(-20, 0));
@@ -257,7 +266,7 @@ void treeMaker(float treeHeight, float treeOffset, color treeColor) { //this mak
 void drawCityScene() {
   background(0);
   for (int i = 0; i < 600; i++) {
-    fill(random(235,255),random(250,255), random(140,255));
+    fill(random(235, 255), random(250, 255), random(140, 255));
     ellipse(i, starYPositions[i], random(1, 2), random(1, 2));
   }
   animation+=2;
@@ -279,9 +288,9 @@ void drawCityScene() {
 
 void drawForestScene() {
   background(71, 183, 251);
-   for (int i=0; i<clouds; i++) {
-      drawCloud(cloudx[i]-width, cloudy[i]-150, cloudSize[i]);
-    }
+  for (int i=0; i<clouds; i++) {
+    drawCloud(cloudx[i]-width, cloudy[i]-150, cloudSize[i]);
+  }
   forestTreeX=0;
   pushMatrix();
   translate(-treeCounter*2, 0);

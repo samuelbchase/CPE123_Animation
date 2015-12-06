@@ -177,6 +177,7 @@ void draw() {
     println(craneX);
   } else if (craneHasLooped < 4) {
     drawForestScene();
+    textContinue(300,570);
     //if (craneHasLooped == 1) {
     //  drawForestScene();} else
     if (craneHasLooped == 1) {
