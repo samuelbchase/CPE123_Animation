@@ -7,6 +7,8 @@ float dvw=.6;
 float dvx=15;
 float dvxw=14.2;
 float dvy=2;
+PImage theEnd;
+float creditsY=0;
 int parentCounter=1;
 boolean clickDoor;
 boolean clickBabyBag;
@@ -14,12 +16,10 @@ color[] foo;
 float catx, catvx, caty, catvy, parentSize, parentsy, parentsvy;
 float lowerRightArm, RightArm, lowerLeftArm, LeftArm;
 boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
-PImage theEnd;
-int creditsCount;
-float creditsY=0;
+float gatorHeadR = 0;
 
 void mousePressed() {
-  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50) {
+  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50){
     clickDoor = true;
   }
   if (clickDoor ==true && (mouseX-300)*(mouseX-300) + (mouseY-490)*(mouseY-490) - 1600 <0) {
@@ -50,7 +50,10 @@ void drawAllTheHouse() {
   }
   if (clickBabyBag == true) {
     parentCounter++;
-    gator();
+    if (parentCounter<6 && parentCounter>3){
+    gatorHeadR = radians(parentCounter*4);
+    }
+    gator(gatorHeadR);
     bagX=5000;
     bagY=5000;
   }
@@ -63,7 +66,7 @@ void drawAllTheHouse() {
   if (parentCounter>=20) {
     drawAHHH();
   }
-  if (parentCounter>=60) {
+   if (parentCounter>=60) {
     drawCredits(creditsY);
     if (parentCounter>=70 && parentCounter<=190) {
       creditsY=creditsY-10;
@@ -181,13 +184,13 @@ void drawDoor() {
   rect(487, 187, 110, 87);
 }
 
-void gator() {
+void gator(float gatorHeadR) {
   pushMatrix();
   ///*
   translate(300, 490);
-  scale(.3);
-  translate(-300, -200);
-  //*/
+   scale(.3);
+   translate(-300, -200);
+  // */
   //collapsed bag
   fill(#fef9dc);
   ellipse(300, 300, 460, 120);
@@ -213,12 +216,9 @@ void gator() {
   vertex(500, 184);
   vertex(464, 205);
   endShape(CLOSE);
-  //base
+  //body
   fill (123, 185, 106);
   ellipse(344, 206, 233, 186);
-  ellipse(70, 155, 74, 69);
-  ellipse(159, 86, 68, 119);
-  ellipse(207, 94, 82, 139);
   ellipse(445, 240, 64, 82);
   pushMatrix();
   translate(500, 211);
@@ -267,17 +267,8 @@ void gator() {
   ellipse(0, 0, 65, 18);
   popMatrix();
   ellipse(154, 286, 55, 67);
-  ellipse(82, 194, 54, 29);
   beginShape();
-  vertex(87, 124);
-  vertex(94, 126);
-  vertex(104, 122);
-  vertex(116, 112);
-  vertex(130, 58);
-  vertex(234, 42);
-  vertex(254, 80);
-  vertex(269, 101);
-  vertex(285, 114);
+  vertex(302, 122);
   vertex(306, 118);
   vertex(441, 156);
   vertex(462, 173);
@@ -293,7 +284,32 @@ void gator() {
   vertex(323, 330);
   vertex(239, 304);
   vertex(170, 302);
-  vertex(141, 258);
+  vertex(146, 250);
+  endShape(CLOSE);
+  //neck
+  ellipse(209, 184, 210, 184);
+  //make head move
+  pushMatrix();
+  translate(181, 163);
+  rotate(gatorHeadR);
+  translate(-181, -163);
+  //head
+  ellipse(70, 155, 74, 69);
+  ellipse(159, 86, 68, 119);
+  ellipse(207, 94, 82, 139);
+  ellipse(82, 194, 54, 29);
+  beginShape();
+  vertex(87, 124);
+  vertex(94, 126);
+  vertex(104, 122);
+  vertex(116, 112);
+  vertex(130, 58);
+  vertex(234, 42);
+  vertex(254, 80);
+  vertex(269, 101);
+  vertex(285, 114);
+  vertex(302, 122);
+  vertex(157, 252);
   vertex(118, 236);
   vertex(102, 225);
   vertex(70, 207);
@@ -355,6 +371,18 @@ void gator() {
   arc(124, 203, 60, 40, 10*PI/8, 14*PI/8);
   arc(174, 164, 80, 70, 0, 6*PI/8);
   arc(214, 178, 48, 30, 10*PI/8, 14*PI/8);
+  noStroke();
+  //teeth
+  fill(255);
+  triangle(82, 195, 93, 203, 98, 192);
+  triangle(157, 194, 167, 182, 173, 198);
+  triangle(208, 186, 221, 190, 214, 175);
+  popMatrix();
+  
+  //end of head translation
+  noFill();
+  stroke(#517A46);
+  strokeWeight(2);
   //throat
   arc(204, 215, 180, 120, 2*PI/8, 6*PI/8);
   //feet lines
@@ -363,30 +391,20 @@ void gator() {
   arc(313, 300, 130, 100, radians(300), radians(380));
   arc(413, 240, 130, 100, radians(-20), radians(90));
   arc(270, 239, 180, 100, radians(90), radians(130));
-  //nose
-  //arc(107, 90, 100, 100, radians(20), radians(90));
-  //arc(84, 164, 50, 80, radians(290), radians(360));
-  noStroke();
-  //teeth
-  fill(255);
-  triangle(82, 195, 93, 203, 98, 192);
-  triangle(157, 194, 167, 182, 173, 198);
-  triangle(208, 186, 221, 190, 214, 175);
   popMatrix();
 }
-
 void prepGround()
 {
   i = 0;
   foo = new color[600*600];
-  for (int i =0; i < 600*600; i++)
+  for(int i =0; i < 600*600; i++)
   {
     foo[i] = color(random(20, 50), random(80, 200), random(0, 30));
   }
 }
 void drawGround() {
   /*fill(#1C853C);
-   rect(0, 470, 600, 200);*/
+  rect(0, 470, 600, 200);*/
 
   i=0;
   for (int x=-10; x< width; x+=random (2, 5)) {
@@ -541,8 +559,8 @@ void drawParents() {
 
 void drawScaredParents() {
   fill(#043152);
-  rect(0, 0, 600, 600);
-  pushMatrix();
+  rect(0,0,600,600);
+ pushMatrix();
   translate(300, parentsy);
   scale(parentSize);
   translate(-300, -300);
@@ -657,14 +675,14 @@ void drawWomenHead() {
   ellipse(205, 140, 20, 30); //rightSleeve
   fill(#F5C18D);
   quad(215, 150, 200, 150, 201, 180, 214, 180); //upper right arm
-  ellipse(207.5, 180, 13, 25);
+  ellipse(207.5,180,13,25);
   pushMatrix();
   translate(212, 180);
   rotate(lowerRightArm);
   translate(-212, -180);
   fill(#F5C18D);
   quad(214, 180, 201, 180, 202, 210, 210, 210); //lower right arm 
-  ellipse(207.5, 180, 13, 25);
+  ellipse(207.5,180,13,25);
   ellipse(206, 220, 15, 30); //right hand 
   popMatrix();
   fill(255);

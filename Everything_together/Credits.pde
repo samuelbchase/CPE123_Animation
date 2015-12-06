@@ -1,7 +1,7 @@
 void drawCredits(float y) {
   pushMatrix();
   translate(0, y);
-  background(20, 121, 108-.05*creditsCount);
+  background(20, 121, 108);
   image(theEnd, 15, 100);
   pushMatrix();
   translate(300, 370);
