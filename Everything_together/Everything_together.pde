@@ -69,7 +69,7 @@ void setup() {
   }
   //TREE STUFF
   for (int i = 0; i < randomTreeHeights.length; i++) {
-    randomTreeHeights[i] = random(0, 30);
+    randomTreeHeights[i] = random(0, 200);
     randomTreeOffsets[i] = random(-10, 10);
     treeColor[i] = color(random(0, 60), random(50, 150), random(0, 60));
   }
@@ -82,7 +82,7 @@ void setup() {
 }
 
 void draw() {
-  if (i < 860) {
+  if (i < 570) {
     background(#65B5F5); 
     noStroke();
     for (int i=0; i<clouds; i++) {
@@ -157,7 +157,7 @@ void draw() {
       } else {
         wingScale = 170;
       }
-      craneX = 150+(i-260);
+      craneX = 150+(i-260)*2;
       craneY = 300+ 10*cos(radians(end));
       craneR = cos(radians(end))*.1;
       craneHeadR  = radians(-84)+cos(radians(end))*.1;
@@ -174,15 +174,16 @@ void draw() {
       }
     }
     i++;
-    println(i);
-  } else if (craneHasLooped < 5) {
+    println(craneX);
+  } else if (craneHasLooped < 4) {
+    drawForestScene();
+    //if (craneHasLooped == 1) {
+    //  drawForestScene();} else
     if (craneHasLooped == 1) {
-      drawForestScene();
-    } else if (craneHasLooped == 2) {
       drawDesertScene();
-    } else if (craneHasLooped == 3) {
+    } else if (craneHasLooped == 2) {
       drawCityScene();
-    } else if (craneHasLooped == 4) {
+    } else if (craneHasLooped == 3) {
       background(#7ec0ee);
       drawLawn();
       drawHouses();
@@ -190,10 +191,10 @@ void draw() {
 
     craneFlying();
 
-    if (craneX > 750 ) {
+    if (craneX >= 760 ) {
       craneX = -170;
     }
-    if (craneX >= 750) {
+    if (craneX == 750) {
       craneHasLooped++;
     }
   } else {
