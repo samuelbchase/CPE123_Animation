@@ -28,6 +28,11 @@ color treeColor[] = new color [300];
 
 void drawDesertScene() {
   background(244, 209, 138);
+   for (int i=0; i<clouds; i++) {
+      drawCloud(cloudx[i]-width, cloudy[i], cloudSize[i]);
+    }
+  fill(244, 209, 138,80);
+  rect(0,0,600,600);
   fill(71, 24, 106);
   pushMatrix();
   translate(-shaleCounter, 0);
@@ -48,6 +53,7 @@ void drawDesertScene() {
   shaleCounter++;
 
   //ground
+  noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
 }
@@ -251,6 +257,7 @@ void treeMaker(float treeHeight, float treeOffset, color treeColor) { //this mak
 void drawCityScene() {
   background(0);
   for (int i = 0; i < 600; i++) {
+    fill(random(235,255),random(250,255), random(140,255));
     ellipse(i, starYPositions[i], random(1, 2), random(1, 2));
   }
   animation+=2;
@@ -272,6 +279,9 @@ void drawCityScene() {
 
 void drawForestScene() {
   background(71, 183, 251);
+   for (int i=0; i<clouds; i++) {
+      drawCloud(cloudx[i]-width, cloudy[i]-150, cloudSize[i]);
+    }
   forestTreeX=0;
   pushMatrix();
   translate(-treeCounter*2, 0);

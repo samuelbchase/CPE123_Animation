@@ -1,7 +1,7 @@
 //Interactive Animation by Bonita Galvan, Ben Troller, Sam Chase and Audrey Gerughty
 color darkC = color(150, 150, 150);
 color lightC = color(211, 211, 211);
-int clouds = 10;
+int clouds = 20;
 float cloudx[] = new float[clouds];
 float cloudy[] = new float[clouds];
 float cloudSize[] = new float[clouds];
@@ -26,7 +26,7 @@ void setup() {
   //setupColor();
   clickDoor = false;
   for (int i=0; i<clouds; i++) {
-    cloudx[i]= random(0, width);
+    cloudx[i]= random(-width, width*2);
     cloudy[i]= random(0, height);
     cloudSize[i]= random(.2, .6 );
   }
@@ -36,9 +36,9 @@ void setup() {
   cloudmanvy=-.1;
   cloudmanSize=1;
   craneX = -170;
-  catx=250;
-  caty=600;
-  catvy=-18;
+  catx=450;
+  caty=850;
+  catvy=-5;
   catvx=-2;
   parentSize=1;
   parentsy=300;
@@ -86,7 +86,7 @@ void draw() {
     background(#65B5F5); 
     noStroke();
     for (int i=0; i<clouds; i++) {
-      drawCloud(cloudx[i], cloudy[i], cloudSize[i]);
+      drawCloud(cloudx[i]+cloudmanx*.65, cloudy[i], cloudSize[i]);
     }
     drawCloudMan();
     drawBabyBag(bagX, bagY, leftCloudArm);

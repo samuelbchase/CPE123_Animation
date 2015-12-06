@@ -19,7 +19,7 @@ boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
 float gatorHeadR = 0;
 
 void mousePressed() {
-  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50){
+  if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50) {
     clickDoor = true;
   }
   if (clickDoor ==true && (mouseX-300)*(mouseX-300) + (mouseY-490)*(mouseY-490) - 1600 <0) {
@@ -28,17 +28,45 @@ void mousePressed() {
 }
 
 void drawAllTheHouse() {
-  noStroke();
-  fill(178, 104, 61);
-  rect(0, 0, width, height);
-  drawBricks();
-  fill(#B27865);
-  rect(150, 50, 300, 423);
-  drawGround();
+
+  if (parentCounter <= 20) {
+    noStroke();
+    fill(178, 104, 61);
+    rect(0, 0, width, height);
+    drawBricks();
+    fill(#B27865);
+    rect(150, 50, 300, 423);
+    drawGround();
+  }
+
   if (clickDoor) {
     drawParents();
   }
+
   drawDoor();
+
+  if (clickBabyBag == true) {
+    parentCounter++;
+    if (parentCounter<6 && parentCounter>3) {
+      gatorHeadR = radians(parentCounter*4);
+    }
+    gator(gatorHeadR);
+    bagX=5000;
+    bagY=5000;
+  }
+  if (parentCounter>=10 && parentCounter<=200) {
+    drawAHHH();
+  } else if (parentCounter>=200) {
+    drawCredits(creditsY);
+  }
+
+  if (parentCounter>=230 && parentCounter<=1450) {
+    creditsY=creditsY-1;
+  }
+  if (creditsY==-1200) {
+    creditsY=0;
+  }
+
   if (clickDoor) {
     dx= dx- dvx;
     dy= dy+ dvy;
@@ -48,33 +76,11 @@ void drawAllTheHouse() {
     craneX = -1000;
     craneY= -1000;
   }
-  if (clickBabyBag == true) {
-    parentCounter++;
-    if (parentCounter<6 && parentCounter>3){
-    gatorHeadR = radians(parentCounter*4);
-    }
-    gator(gatorHeadR);
-    bagX=5000;
-    bagY=5000;
-  }
   if (dx <= 210) {
     dvx=0;
     dvy=0;
     dvxw=0;
     dvw=0;
-  }
-  if (parentCounter>=20) {
-    drawAHHH();
-  }
-   if (parentCounter>=60) {
-    drawCredits(creditsY);
-    if (parentCounter>=70 && parentCounter<=190) {
-      creditsY=creditsY-10;
-    }
-    if (creditsY==-1200) {
-      creditsY=0;
-    }
-    drawCredits(creditsY);
   }
 }
 
@@ -188,8 +194,8 @@ void gator(float gatorHeadR) {
   pushMatrix();
   ///*
   translate(300, 490);
-   scale(.3);
-   translate(-300, -200);
+  scale(.3);
+  translate(-300, -200);
   // */
   //collapsed bag
   fill(#fef9dc);
@@ -378,7 +384,7 @@ void gator(float gatorHeadR) {
   triangle(157, 194, 167, 182, 173, 198);
   triangle(208, 186, 221, 190, 214, 175);
   popMatrix();
-  
+
   //end of head translation
   noFill();
   stroke(#517A46);
@@ -397,14 +403,14 @@ void prepGround()
 {
   i = 0;
   foo = new color[600*600];
-  for(int i =0; i < 600*600; i++)
+  for (int i =0; i < 600*600; i++)
   {
     foo[i] = color(random(20, 50), random(80, 200), random(0, 30));
   }
 }
 void drawGround() {
   /*fill(#1C853C);
-  rect(0, 470, 600, 200);*/
+   rect(0, 470, 600, 200);*/
 
   i=0;
   for (int x=-10; x< width; x+=random (2, 5)) {
@@ -559,14 +565,16 @@ void drawParents() {
 
 void drawScaredParents() {
   fill(#043152);
-  rect(0,0,600,600);
- pushMatrix();
+  rect(0, 0, 600, 600);
+  pushMatrix();
   translate(300, parentsy);
   scale(parentSize);
   translate(-300, -300);
   drawManHead();
   drawWomenHead();
+  drawCat(catx, caty);
   popMatrix();
+  
 }
 
 
@@ -675,14 +683,14 @@ void drawWomenHead() {
   ellipse(205, 140, 20, 30); //rightSleeve
   fill(#F5C18D);
   quad(215, 150, 200, 150, 201, 180, 214, 180); //upper right arm
-  ellipse(207.5,180,13,25);
+  ellipse(207.5, 180, 13, 25);
   pushMatrix();
   translate(212, 180);
   rotate(lowerRightArm);
   translate(-212, -180);
   fill(#F5C18D);
   quad(214, 180, 201, 180, 202, 210, 210, 210); //lower right arm 
-  ellipse(207.5,180,13,25);
+  ellipse(207.5, 180, 13, 25);
   ellipse(206, 220, 15, 30); //right hand 
   popMatrix();
   fill(255);
@@ -728,7 +736,7 @@ void drawManHead() {
   quad(113, 115, 98, 115, 98, 230, 108, 230); //left arm 
   fill(#810C14);
   triangle(65, 125, 85, 125, 75, 140); //tie knot
-  triangle(65, 175, 85, 175, 75, 190); //tie point
+  triangle(65, 174, 85, 174, 75, 190); //tie point
   triangle(75, 120, 65, 175, 85, 175); //tie body 
   fill(255);
   stroke(#989190);
@@ -906,5 +914,4 @@ void drawAHHH() {
     catvy=catvy*-1;
     catvx=-1;
   }
-  drawCat(catx, caty);
 }

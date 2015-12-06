@@ -7,13 +7,15 @@ void drawCredits(float y) {
   translate(300, 370);
   scale(2);
   translate(-300, -490);
+  noStroke();
+  gator(0);
   popMatrix();
   pushMatrix();
-  translate(0,700);
+  translate(0, 700);
   textSize(80);
-  fill(#79EA3E);
+  fill(255);
   textAlign(CENTER);
-  text("Animation By", 300,0);
+  text("Animation By", 300, 0);
   text("Audrey", 300, 100); 
   text("Ben", 300, 200);
   text("Bonita", 300, 300);
