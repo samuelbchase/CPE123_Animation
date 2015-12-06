@@ -266,7 +266,7 @@ void treeMaker(float treeHeight, float treeOffset, color treeColor) { //this mak
 void drawCityScene() {
   background(0);
   for (int i = 0; i < 600; i++) {
-    fill(random(235, 255), random(250, 255), random(140, 255));
+    fill(random(235, 255), random(250, 255), random(180, 255));
     ellipse(i, starYPositions[i], random(1, 2), random(1, 2));
   }
   animation+=2;
