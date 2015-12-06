@@ -20,3 +20,5 @@ List of things to do:
 * Add tumbleweed to desert scene (Ben)
 * Add wings to standing crane (Audrey)
 * Change position that crane stops and waits for click
+* Add clouds to forest and town scenes
+* Make stars in city scene white
