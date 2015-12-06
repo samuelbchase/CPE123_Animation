@@ -235,6 +235,16 @@ void drawBuilding(int i, int x)
   fill(#5D6571);
   translate(SamCityWidths[i]/2, -SamCityHeights[i]);
   triangle(-SamCityRoofs[i]/2, 0, SamCityRoofs[i]/2, 0, 0, -20);
+  int counter = 1;
+  for(float j = 0; j > .90; j-=.01)
+  {
+  pushMatrix();
+    translate(counter,0);
+    counter++;
+    scale(i);
+    triangle(-SamCityRoofs[j]/2, 0, SamCityRoofs[j]/2, 0, 0, -20);
+   popMatrix();  
+  }
   line(0, -20, 0, -15+random(-20, 0));
   popMatrix();
 }
