@@ -18,9 +18,16 @@ float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
 int houseCounter = 0;
 color houseColor[] = new color [60000];
 PFont text;
+float craneButtonHeight = 0;
+//import processing.sound.*;
+//SoundFile [] music, credits;
 
 
 void setup() {
+  //music = new SoundFile(this, "music.mp3");
+  //music.play();
+  //credits = new SoundFile(this, "credits.mp3");
+  //credits.cue();
   text = loadFont("Giddehand-48.vlw");
   size(600, 700);
   wingScale = 0;
@@ -161,7 +168,7 @@ void draw() {
         wingScale = 170;
       }
       craneX = 150+(i-260)*2;
-      craneY = 300+ 10*cos(radians(end));
+      craneY = 300+craneButtonHeight+ 10*cos(radians(end));
       craneR = cos(radians(end))*.1;
       craneHeadR  = radians(-84)+cos(radians(end))*.1;
       bagX = craneX+250;
@@ -177,7 +184,7 @@ void draw() {
       }
     }
     i++;
-    println(craneX);
+    println(flyingCounter);
   } else if (craneHasLooped < 4) {
     drawForestScene();
     textBox();

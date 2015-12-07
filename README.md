@@ -9,16 +9,11 @@ Meet deadlines, contain a story, include articulated character animation, create
 
 List of things to do:
 
-* Make city look nicer/3d
-* Make crane follow mouseY (Audrey)
+
 * Don't let credits overlap with parents at end (Bo)
-* Add text prompts (Bo)
 * Make crane flip if clicked (Ben)
 * Make cat's eyes move (Ben)
 * Add music
 * Change grass (again?) (Ben)
 * Add tumbleweed to desert scene (Ben)
 * Add wings to standing crane (Audrey)
-* Change position that crane stops and waits for click
-* Add clouds to forest and town scenes
-* Make stars in city scene white

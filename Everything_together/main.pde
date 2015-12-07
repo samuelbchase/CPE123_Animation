@@ -170,12 +170,12 @@ void craneFlying() {
   } else {
     wingScale = 170;
   }
-  if (flyingCounter < 180 + 170) {
+  if (flyingCounter < 200 ) {
     craneX+=2;
   } else if (mouseWasClicked >= 1) {
     craneX+=2;
   }
-  craneY = 300+ 10*cos(radians(flyingCounter));
+  craneY = 300+ craneButtonHeight+ 10*cos(radians(flyingCounter));
   craneR = cos(radians(flyingCounter))*.1;
   craneHeadR  = radians(-84)+cos(radians(flyingCounter))*.1;
   bagX = craneX+138+(cos(radians(flyingCounter)))*-2;
@@ -312,4 +312,15 @@ void drawForestScene() {
   treeCounter++;
   fill(109, 69, 33);
   rect(0, 587, width, 50);
+}
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP&&craneY>100) {
+      craneButtonHeight-=10;
+    } else if (keyCode == DOWN&&craneY<350) {
+      craneButtonHeight+=10;
+   } 
+  } else {
+    
+  }
 }
