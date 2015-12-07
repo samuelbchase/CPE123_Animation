@@ -918,7 +918,6 @@ void drawAHHH() {
     parentsvy=0;
   }
   if (caty<=400) {
-    catvy=catvy*-.25;
-    catvx=-1;
+    catvy=catvy*-1;
   }
 }
