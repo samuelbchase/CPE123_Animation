@@ -171,9 +171,9 @@ void craneFlying() {
     wingScale = 170;
   }
   if (flyingCounter < 180 + 170) {
-    craneX+=2;
+    craneX+=10;
   } else if (mouseWasClicked >= 1) {
-    craneX+=2;
+    craneX+=10;
   }
   craneY = 300+ 10*cos(radians(flyingCounter));
   craneR = cos(radians(flyingCounter))*.1;
@@ -239,11 +239,11 @@ void drawBuilding(int i, int x)
   for(float j = 0; j > .90; j-=.01)
   {
   pushMatrix();
-    translate(counter,0);
-    counter++;
-    scale(i);
-    triangle(-SamCityRoofs[j]/2, 0, SamCityRoofs[j]/2, 0, 0, -20);
-   popMatrix();  
+   translate(counter,0);
+   counter++;
+   scale(i);
+   triangle(-SamCityRoofs[j]/2, 0, SamCityRoofs[j]/2, 0, 0, -20);
+  popMatrix();  
   }
   line(0, -20, 0, -15+random(-20, 0));
   popMatrix();

@@ -17,9 +17,12 @@ float craneX, craneY, craneR, craneHeadR, craneNeckR, wingScale, craneLegR, bagX
 float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
 int houseCounter = 0;
 color houseColor[] = new color [60000];
+PFont text;
+
 
 void setup() {
-  size(600, 600);
+  text = loadFont("Giddehand-48.vlw");
+  size(600, 700);
   wingScale = 0;
   smooth();
   prepGround();
@@ -36,9 +39,9 @@ void setup() {
   cloudmanvy=-.1;
   cloudmanSize=1;
   craneX = -170;
-  catx=450;
-  caty=850;
-  catvy=-5;
+  catx=300;
+  caty=700;
+  catvy=-30;
   catvx=-2;
   parentSize=1;
   parentsy=300;
@@ -51,9 +54,9 @@ void setup() {
     }
   }
   for (int i = 0; i < numberOfCacti; i++) {
-    cactusHeight[i] = random(600, 3000);
+    cactusHeight[i] = random(1500, 4000);
   }
-   for (int i = 0; i < numberOfCacti; i++) {
+  for (int i = 0; i < numberOfCacti; i++) {
     cactusScale[i] = random(0.1, 0.13);
   }
   for (int i = 0; i < 100; i++) {
@@ -81,7 +84,7 @@ void setup() {
   theEnd.loadPixels();
 }
 
-void draw() {
+void draw() {  
   if (i < 570) {
     background(#65B5F5); 
     noStroke();
@@ -177,17 +180,24 @@ void draw() {
     println(craneX);
   } else if (craneHasLooped < 4) {
     drawForestScene();
-    textContinue(300,570);
+    textBox();
+    textContinue(300, 650);
     //if (craneHasLooped == 1) {
     //  drawForestScene();} else
     if (craneHasLooped == 1) {
       drawDesertScene();
+      textBox();
+      textArrow(300, 670);
     } else if (craneHasLooped == 2) {
       drawCityScene();
+      textBox();
+      textArrow(300, 670);
     } else if (craneHasLooped == 3) {
       background(#7ec0ee);
       drawLawn();
       drawHouses();
+      textBox();
+      textArrow(300, 670);
     }
 
     craneFlying();
@@ -252,4 +262,5 @@ void draw() {
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
     houseCounter++;
   }
+  
 }

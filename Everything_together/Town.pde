@@ -34,7 +34,7 @@ for( int i = 0; i < 60000; i++)
 void drawHouses()
 { 
    for (int i=0; i<clouds; i++) {
-      drawCloud(cloudx[i]-width, cloudy[i]-100, cloudSize[i]);
+      drawCloud(cloudx[i]-width, cloudy[i]-200, cloudSize[i]);
     }
   for(int i = 15; i < 60000; i += 75)
   {

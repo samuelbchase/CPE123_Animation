@@ -44,7 +44,14 @@ void drawAllTheHouse() {
   }
 
   drawDoor();
-
+  
+ if (!clickDoor) {
+    textBox();
+    textKnock(300, 670);
+  } else if(!clickBabyBag) {
+    textBox();
+    textBag(300, 650);
+  }
   if (clickBabyBag == true) {
     parentCounter++;
     if (parentCounter<6 && parentCounter>3) {
@@ -103,6 +110,7 @@ void drawBricks() {
       rect(3+x*53-y*30, 3 +y*33, 50, 30);
     }
   }
+  
 }
 
 void drawDoor() {
@@ -565,7 +573,7 @@ void drawParents() {
 
 void drawScaredParents() {
   fill(#043152);
-  rect(0, 0, 600, 600);
+  rect(0, 0, 600, 700);
   pushMatrix();
   translate(300, parentsy);
   scale(parentSize);
@@ -574,7 +582,6 @@ void drawScaredParents() {
   drawWomenHead();
   drawCat(catx, caty);
   popMatrix();
-  
 }
 
 
@@ -911,7 +918,7 @@ void drawAHHH() {
     parentsvy=0;
   }
   if (caty<=400) {
-    catvy=catvy*-1;
+    catvy=catvy*-.25;
     catvx=-1;
   }
 }
