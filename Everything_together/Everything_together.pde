@@ -19,20 +19,17 @@ int houseCounter = 0;
 color houseColor[] = new color [60000];
 PFont text;
 float craneButtonHeight = 0;
-
 float tumbleWeedX = 0;
 float tumbleWeedRotate = 0;
 float tumbleWeedRadius[] = new float[20];
 float tumbleWeedOffset[] = new float[20];
-//import processing.sound.*;
-//SoundFile [] music, credits;
+import processing.sound.*;
+SoundFile music, credits;
 
 
 void setup() {
-  //music = new SoundFile(this, "music.mp3");
-  //music.play();
-  //credits = new SoundFile(this, "credits.mp3");
-  //credits.cue();
+  music = new SoundFile(this, "credits.mp3");
+  music.play();
   text = loadFont("Giddehand-48.vlw");
   size(600, 700);
   wingScale = 0;
@@ -91,7 +88,7 @@ void setup() {
   for (int i = 0; i < 60000; i++) {
     houseColor[i] = color(random(70, 210), random(50, 240), random(80, 230));
   }
-  //initialize tumbleweed variables
+    //initialize tumbleweed variables
   for (int i = 0; i < 20; i++) {
     if (i == 0) {
       tumbleWeedOffset[i] = 0;

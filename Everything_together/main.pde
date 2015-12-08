@@ -58,7 +58,6 @@ void drawDesertScene() {
   noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
-
   //tumbleweeds
   for (int i = 0; i < 20; i++) {
     if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
@@ -93,6 +92,7 @@ void drawAllTumbleWeeds() {
   tumbleWeedX += 1.7;
   tumbleWeedRotate += 2;
 }
+
 
 void drawACactus(float x, float y, float scale) {
   pushMatrix();
