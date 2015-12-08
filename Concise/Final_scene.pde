@@ -153,9 +153,22 @@ void drawDoor() {
   fill(255);
   ellipse(43, 40, 10, 10);
   ellipse(57, 40, 15, 15);
+  //Declares PVectors
+  PVector mousePosition1 = new PVector(mouseX, mouseY);
+  PVector mousePosition2 = new PVector(mouseX, mouseY);
+  PVector leftEyeCenter = new PVector(530 + 43 + -50, height/2 - 100);
+  PVector rightEyeCenter = new PVector(530 + 57 + -50, height/2 - 100);
+  //Assigns vectors appropriate values
+  mousePosition1.sub(leftEyeCenter);
+  mousePosition2.sub(rightEyeCenter);
+  mousePosition1.normalize();
+  mousePosition2.normalize();
+  mousePosition1.mult(10/3);
+  mousePosition2.mult(15/3);
+  //pupils
   fill(0);
-  ellipse(43, 42, 3, 3);
-  ellipse(57, 42, 4, 4);
+  ellipse(43 + mousePosition1.x, 42 + mousePosition1.y, 3, 3);
+  ellipse(57 + mousePosition2.x, 42 + mousePosition2.y, 4, 4);
   fill(#FA5DD8);
   triangle(45, 50, 55, 50, 50, 56);
   stroke(0);
