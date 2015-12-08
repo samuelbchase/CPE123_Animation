@@ -33,27 +33,28 @@ void drawAllTheHouse() {
       textBox();
       textBag(300, 650);
     }
-    if (clickBabyBag == true) {
-      parentCounter++;
-      if (parentCounter<6 && parentCounter>3) {
-        gatorHeadR = radians(parentCounter*4);
-      }
-      gator(gatorHeadR);
-      bagX=5000;
-      bagY=5000;
-    }
   }
-  if (parentCounter>=10 && parentCounter<=200) {
+  if (clickBabyBag == true) {
+    parentCounter++;
+    if (parentCounter<6 && parentCounter>3) {
+      gatorHeadR = radians(parentCounter*4);
+    }
+    gator(gatorHeadR);
+    bagX=5000;
+    bagY=5000;
+  }
+
+  if (parentCounter>=20 && parentCounter<230) {
     drawAHHH();
-  } else if (parentCounter>=200) {
+  } else if (parentCounter>=230) {
     drawCredits(creditsY);
   }
 
-  if (parentCounter>=230 && parentCounter<=1450) {
+  if (parentCounter>=260 && parentCounter<=1510) {
     creditsY=creditsY-1;
   }
   if (creditsY==-1200) {
-    creditsY=0;
+    creditsY=20;
   }
 
   if (clickDoor) {
@@ -88,7 +89,7 @@ void drawBabyBag(float bagX, float bagY) {
 void drawBricks() {
   fill(#7C1606);
   for (int x=0; x< width; x++) {
-    for (int y=0; y< height; y++) {
+    for (int y=0; y< height - 300; y++) {
       rect(3+x*53-y*30, 3 +y*33, 50, 30);
     }
   }

@@ -162,7 +162,7 @@ void setup() {
 }
 
 void draw() {  
-//beginning scene
+  //beginning scene
   if (i < 570) {
     background(#65B5F5); 
     noStroke();
@@ -257,8 +257,8 @@ void draw() {
     i++;
     println(flyingCounter);
   } 
-//Flying scenes  
-    else if (craneHasLooped < 4) {
+  //Flying scenes  
+  else if (craneHasLooped < 4) {
     drawForestScene();
     textBox();
     textContinue(300, 650);
@@ -291,8 +291,9 @@ void draw() {
       craneHasLooped++;
     }
   } 
-//Ending scene  
+  //Ending scene  
   else {
+    println(parentCounter);
     drawAllTheHouse();
     if (houseCounter<10) {
       //crane standing
@@ -347,15 +348,15 @@ void draw() {
     houseCounter++;
   }
   if (craneFlip==true ) {
-   
-   if (k<2*PI ) {
-     craneFlipR++;
-   } else if (k>2*PI) {
-     craneFlip=false;
-   }
-   k++;
+
+    if (k<2*PI ) {
+      craneFlipR++;
+    } else if (k>2*PI) {
+      craneFlip=false;
+    }
+    k++;
   } else {
-   craneFlipR = 0;
-   k=0;
+    craneFlipR = 0;
+    k=0;
   }
 }
