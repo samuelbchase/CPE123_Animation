@@ -9,6 +9,5 @@ Meet deadlines, contain a story, include articulated character animation, create
 
 List of things to do:
 
-* Make crane flip if clicked (Ben)
 * Change grass (again?) (Ben)
 * Add wings to standing crane (Audrey)
