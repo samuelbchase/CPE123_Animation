@@ -59,7 +59,7 @@ void setup() {
     }
   }
   for (int i = 0; i < numberOfCacti; i++) {
-    cactusHeight[i] = random(1500, 4000);
+    cactusHeight[i] = random(2000, 4000);
   }
   for (int i = 0; i < numberOfCacti; i++) {
     cactusScale[i] = random(0.1, 0.13);
@@ -87,6 +87,16 @@ void setup() {
   setupCity();
   theEnd = loadImage("TheEnd.png");
   theEnd.loadPixels();
+  
+  //initialize tumbleweed variables
+  for (int i = 0; i < 20; i++) {
+    if (i == 0) {
+      tumbleWeedOffset[i] = 0;
+    } else {
+      tumbleWeedOffset[i] = tumbleWeedOffset[i - 1] - random(600, 1500);
+    }
+    tumbleWeedRadius[i] = random(15, 35);
+  }
 }
 
 void draw() {  

@@ -25,6 +25,10 @@ float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
 color treeColor[] = new color [300];
 
+float tumbleWeedX = 0;
+float tumbleWeedRotate = 0;
+float tumbleWeedRadius[] = new float[20];
+float tumbleWeedOffset[] = new float[20];
 
 void drawDesertScene() {
   background(244, 209, 138);
@@ -45,7 +49,9 @@ void drawDesertScene() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
+    if (cactusX[i] > -100 && cactusX[i] < 700) {
+      drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
+    }
   }
   stroke(0);
   strokeWeight(1);
@@ -56,6 +62,40 @@ void drawDesertScene() {
   noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
+  
+  //tumbleweeds
+  for (int i = 0; i < 20; i++) {
+    if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
+      drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
+    }
+  }
+  tumbleWeedX += 4;
+  tumbleWeedRotate += 12;
+}
+
+void drawTumbleWeed(float tumbleWeedX, float tumbleWeedRotate, float tumbleWeedScale) {
+  pushMatrix();
+  translate(tumbleWeedX, 580-tumbleWeedScale);
+  rotate(tumbleWeedRotate);
+  float xc = 0, yc = 0;
+  for (int i = 0; i < 2900; i += 1) {
+    xc = 0 + tumbleWeedScale*cos((2*(radians(i)/5)))*cos(radians(i));
+    yc = 10 + tumbleWeedScale*cos((2*(radians(i)/5)))*sin(radians(i));
+    noStroke();
+    fill(229, 170, 87);
+    ellipse(xc, yc, tumbleWeedScale/20, tumbleWeedScale/20);
+  }
+  popMatrix();
+}
+
+void drawAllTumbleWeeds() {
+  for (int i = 0; i < 20; i++) {
+    if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
+      drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
+    }
+  }
+  tumbleWeedX += 1.7;
+  tumbleWeedRotate += 2;
 }
 
 void drawACactus(float x, float y, float scale) {
