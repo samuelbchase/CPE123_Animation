@@ -100,6 +100,16 @@ void setup() {
   setupCity();
   theEnd = loadImage("TheEnd.png");
   theEnd.loadPixels();
+  
+  //initialize tumbleweed variables
+  for (int i = 0; i < 20; i++) {
+    if (i == 0) {
+      tumbleWeedOffset[i] = 0;
+    } else {
+      tumbleWeedOffset[i] = tumbleWeedOffset[i - 1] - random(600, 1500);
+    }
+    tumbleWeedRadius[i] = random(15, 35);
+  }
 }
 
 void draw() {  

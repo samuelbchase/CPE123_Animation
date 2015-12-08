@@ -25,7 +25,6 @@ float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
 color treeColor[] = new color [300];
 
-
 void drawDesertScene() {
   background(244, 209, 138);
   for (int i=0; i<clouds; i++) {
@@ -58,6 +57,7 @@ void drawDesertScene() {
   noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
+
   //tumbleweeds
   for (int i = 0; i < 20; i++) {
     if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
@@ -349,6 +349,7 @@ void drawForestScene() {
   fill(109, 69, 33);
   rect(0, 587, width, 50);
 }
+
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == UP&&craneY>100) {
