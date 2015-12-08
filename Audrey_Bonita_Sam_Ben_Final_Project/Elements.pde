@@ -79,10 +79,11 @@ void textArrow(int x, int y) {
   textAlign(CENTER, CENTER );
   pushMatrix();
   translate(x, y);
-  textSize(30);
+  textSize(20);
   fill(255);
-  text("Use the up and down arrow keys", 0, -40);
-  text("to move the stork", 0, 0);
+  text("Use the up and down arrow keys", 0, -45);
+  text("to move the stork", 0, -15);
+  text("Click space bar for a surprise",0,15 );
   popMatrix();
 }
 
@@ -93,8 +94,8 @@ void textKnock(int x, int y) {
   translate(x, y);
   textSize(30);
   fill(255);
-  text("Click the door to knock", 0, -40);
-  text("once the stork has left", 0, 0);
+  text("Once the stork has left", 0, -40);
+  text("click the door to knock", 0, 0);
   popMatrix();
 }
 
