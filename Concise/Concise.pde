@@ -87,12 +87,12 @@ SoundFile music, credits;
 
 //Setting initial variable values
 void setup() {
+  size(600, 700);
+  smooth();
   music = new SoundFile(this, "credits.mp3");
   music.play();
-  text = loadFont("Giddehand-48.vlw");
-  size(600, 700);
-  wingScale = 0;
-  smooth();
+  text = loadFont("Giddehand-48.vlw");  
+  wingScale = 0;  
   prepGround();
   //setupColor();
   clickDoor = false;
@@ -162,6 +162,7 @@ void setup() {
 }
 
 void draw() {  
+//beginning scene
   if (i < 570) {
     background(#65B5F5); 
     noStroke();
@@ -255,7 +256,9 @@ void draw() {
     }
     i++;
     println(flyingCounter);
-  } else if (craneHasLooped < 4) {
+  } 
+//Flying scenes  
+    else if (craneHasLooped < 4) {
     drawForestScene();
     textBox();
     textContinue(300, 650);
@@ -287,7 +290,9 @@ void draw() {
     if (craneX == 750) {
       craneHasLooped++;
     }
-  } else {
+  } 
+//Ending scene  
+  else {
     drawAllTheHouse();
     if (houseCounter<10) {
       //crane standing
