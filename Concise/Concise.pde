@@ -17,6 +17,7 @@ boolean rightCloudArmR= true;
 int end = 1;
 int secondaryCounter = 1;
 int i = 0;
+int k=0;
 float craneX, craneY, craneR, craneHeadR, craneNeckR, wingScale, craneLegR, bagX, bagY, cloudEyeX, cloudEyeY;
 float cloudmanx, cloudmanvx, cloudmany, cloudmanvy, cloudmanSize, cloudmanSizeV;
 int houseCounter = 0;
@@ -74,6 +75,8 @@ int treeCounter = 0;
 float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
 color treeColor[] = new color [300];
+float craneFlipR=0;
+boolean craneFlip =false;
 
 //town
 float HouseCounter = 0;
@@ -338,5 +341,17 @@ void draw() {
     drawBabyBag(bagX, bagY);
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
     houseCounter++;
+  }
+  if (craneFlip==true ) {
+   
+   if (k<2*PI ) {
+     craneFlipR++;
+   } else if (k>2*PI) {
+     craneFlip=false;
+   }
+   k++;
+  } else {
+   craneFlipR = 0;
+   k=0;
   }
 }

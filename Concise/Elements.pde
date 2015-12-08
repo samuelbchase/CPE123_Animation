@@ -342,6 +342,7 @@ void cactusPositionUpdate() {
 //Crane
 void craneFlying() {
   noStroke();
+
   drawBabyBag(bagX, bagY);
   if (secondaryCounter % 2 == 0) {
     wingScale = 50;
@@ -354,7 +355,7 @@ void craneFlying() {
     craneX+=2;
   }
   craneY = 300+ craneButtonHeight+ 10*cos(radians(flyingCounter));
-  craneR = cos(radians(flyingCounter))*.1;
+  craneR = cos(radians(flyingCounter))*.1+craneFlipR;
   craneHeadR  = radians(-84)+cos(radians(flyingCounter))*.1;
   bagX = craneX+138+(cos(radians(flyingCounter)))*-2;
   bagY = craneY+13+cos(radians(flyingCounter))*18+63;
@@ -363,11 +364,16 @@ void craneFlying() {
   cloudEyeX = 370+1*(flyingCounter-260)/100;
   cloudEyeY = 97+1*(flyingCounter-260)/400;
   noStroke();
-  crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
   flyingCounter++;
   if (flyingCounter % 7 == 0) {
     secondaryCounter++;
+  } else {
+    drawBabyBag(bagX, bagY);
+    if (secondaryCounter % 2 == 0) {
+      wingScale = 50;
+    }
   }
+  crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
 }
 
 void setupCity()
@@ -495,7 +501,8 @@ void keyPressed() {
     } else if (keyCode == DOWN&&craneY<350) {
       craneButtonHeight+=10;
     }
-  } else {
+  } else if (key == ' ') {
+    craneFlip=true;
   }
 }
 
