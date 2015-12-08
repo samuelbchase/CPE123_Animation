@@ -60,7 +60,7 @@ float cactusScale[] = new float [numberOfCacti];
 int mouseWasClicked = 0;
 int flyingCounter = 1;
 
-int craneHasLooped = 0;
+int craneHasLooped = 4;
 
 int SamCityHeights[] = new int[100];
 int SamCityWidths[] = new int[100];
@@ -109,7 +109,7 @@ void setup() {
   craneX = -170;
   catx=300;
   caty=700;
-  catvy=-60;
+  catvy=-6;
   catvx=-2;
   parentSize=1;
   parentsy=300;

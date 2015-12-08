@@ -8,38 +8,40 @@ void mousePressed() {
 }
 
 void drawAllTheHouse() {
+  if (parentCounter < 10) {
 
-  if (parentCounter <= 20) {
-    noStroke();
-    fill(178, 104, 61);
-    rect(0, 0, width, height);
-    drawBricks();
-    fill(#B27865);
-    rect(150, 50, 300, 423);
-    drawGround();
-  }
-
-  if (clickDoor) {
-    drawParents();
-  }
-
-  drawDoor();
-
-  if (!clickDoor) {
-    textBox();
-    textKnock(300, 670);
-  } else if (!clickBabyBag) {
-    textBox();
-    textBag(300, 650);
-  }
-  if (clickBabyBag == true) {
-    parentCounter++;
-    if (parentCounter<6 && parentCounter>3) {
-      gatorHeadR = radians(parentCounter*4);
+    if (parentCounter <= 20) {
+      noStroke();
+      fill(178, 104, 61);
+      rect(0, 0, width, height);
+      drawBricks();
+      fill(#B27865);
+      rect(150, 50, 300, 423);
+      drawGround();
     }
-    gator(gatorHeadR);
-    bagX=5000;
-    bagY=5000;
+
+    if (clickDoor) {
+      drawParents();
+    }
+
+    drawDoor();
+
+    if (!clickDoor) {
+      textBox();
+      textKnock(300, 670);
+    } else if (!clickBabyBag) {
+      textBox();
+      textBag(300, 650);
+    }
+    if (clickBabyBag == true) {
+      parentCounter++;
+      if (parentCounter<6 && parentCounter>3) {
+        gatorHeadR = radians(parentCounter*4);
+      }
+      gator(gatorHeadR);
+      bagX=5000;
+      bagY=5000;
+    }
   }
   if (parentCounter>=10 && parentCounter<=200) {
     drawAHHH();
@@ -862,7 +864,7 @@ void drawAHHH() {
   if (LeftArmR == true) {
     LeftArm = radians(90);
   } else {
-    LeftArm += .5;
+    LeftArm += .05;
   }
 
   if (lowerLeftArm > radians(120)) {
@@ -872,7 +874,7 @@ void drawAHHH() {
   if (lowerLeftArmR == true) {
     lowerLeftArm = radians(120);
   } else {
-    lowerLeftArm += .6;
+    lowerLeftArm += .06;
   }
 
 
@@ -883,7 +885,7 @@ void drawAHHH() {
     (RightArmR == true) {
     RightArm = radians(-90);
   } else {
-    RightArm -= .5;
+    RightArm -= .05;
   }
 
   if (lowerRightArm > radians(-120)) {
@@ -893,12 +895,12 @@ void drawAHHH() {
   if (lowerRightArmR == true) {
     lowerRightArm = radians(-120);
   } else {
-    lowerRightArm -= .6;
+    lowerRightArm -= .06;
   }
 
   drawScaredParents();
   parentsy=parentsy+parentsvy;
-  parentSize=parentSize*1.05;
+  parentSize=parentSize*1.005;
   catx=catx+catvx;
   caty=caty+catvy;
   if (parentSize>=1.5) {
