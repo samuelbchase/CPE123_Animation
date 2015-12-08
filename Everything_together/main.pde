@@ -25,11 +25,6 @@ float randomTreeHeights[] = new float[300];
 float randomTreeOffsets[] = new float[300];
 color treeColor[] = new color [300];
 
-float tumbleWeedX = 0;
-float tumbleWeedRotate = 0;
-float tumbleWeedRadius[] = new float[20];
-float tumbleWeedOffset[] = new float[20];
-
 void drawDesertScene() {
   background(244, 209, 138);
   for (int i=0; i<clouds; i++) {
@@ -62,7 +57,7 @@ void drawDesertScene() {
   noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
-  
+
   //tumbleweeds
   for (int i = 0; i < 20; i++) {
     if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
@@ -97,6 +92,7 @@ void drawAllTumbleWeeds() {
   tumbleWeedX += 1.7;
   tumbleWeedRotate += 2;
 }
+
 
 void drawACactus(float x, float y, float scale) {
   pushMatrix();
@@ -276,14 +272,14 @@ void drawBuilding(int i, int x)
   translate(SamCityWidths[i]/2, -SamCityHeights[i]);
   triangle(-SamCityRoofs[i]/2, 0, SamCityRoofs[i]/2, 0, 0, -20);
   int counter = 1;
-  for(float j = 0; j > .90; j-=.01)
+  for (float j = 0; j > .90; j-=.01)
   {
-  pushMatrix();
-  translate(counter,0);
-  counter++;
-  scale(i);
-  triangle((int)-SamCityRoofs[i]/2, 0, (int)SamCityRoofs[i]/2, 0, 0, -20);
-  popMatrix();  
+    pushMatrix();
+    translate(counter, 0);
+    counter++;
+    scale(i);
+    triangle((int)-SamCityRoofs[i]/2, 0, (int)SamCityRoofs[i]/2, 0, 0, -20);
+    popMatrix();
   }
   line(0, -20, 0, -15+random(-20, 0));
   popMatrix();
@@ -353,14 +349,14 @@ void drawForestScene() {
   fill(109, 69, 33);
   rect(0, 587, width, 50);
 }
+
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == UP&&craneY>100) {
       craneButtonHeight-=10;
     } else if (keyCode == DOWN&&craneY<350) {
       craneButtonHeight+=10;
-   } 
+    }
   } else {
-    
   }
 }
