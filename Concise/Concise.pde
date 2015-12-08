@@ -81,15 +81,14 @@ boolean craneFlip =false;
 //town
 float HouseCounter = 0;
 int colorcount;
-//import processing.sound.*;
-//SoundFile [] music, credits;
+
+import processing.sound.*;
+SoundFile music, credits;
 
 //Setting initial variable values
 void setup() {
-  //music = new SoundFile(this, "music.mp3");
-  //music.play();
-  //credits = new SoundFile(this, "credits.mp3");
-  //credits.cue();
+  music = new SoundFile(this, "credits.mp3");
+  music.play();
   text = loadFont("Giddehand-48.vlw");
   size(600, 700);
   wingScale = 0;
