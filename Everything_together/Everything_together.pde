@@ -26,7 +26,6 @@ float tumbleWeedOffset[] = new float[20];
 import processing.sound.*;
 SoundFile music, credits;
 
-
 void setup() {
   music = new SoundFile(this, "credits.mp3");
   music.play();
@@ -88,7 +87,7 @@ void setup() {
   for (int i = 0; i < 60000; i++) {
     houseColor[i] = color(random(70, 210), random(50, 240), random(80, 230));
   }
-    //initialize tumbleweed variables
+  //initialize tumbleweed variables
   for (int i = 0; i < 20; i++) {
     if (i == 0) {
       tumbleWeedOffset[i] = 0;
@@ -100,7 +99,7 @@ void setup() {
   setupCity();
   theEnd = loadImage("TheEnd.png");
   theEnd.loadPixels();
-  
+
   //initialize tumbleweed variables
   for (int i = 0; i < 20; i++) {
     if (i == 0) {
@@ -113,6 +112,7 @@ void setup() {
 }
 
 void draw() {  
+//beginning scene
   if (i < 570) {
     background(#65B5F5); 
     noStroke();
@@ -163,7 +163,7 @@ void draw() {
       cloudEyeY = 96;
       craneNeckR = 0;
       crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
-    } else if (i<260) {
+    } else if (i<260) { //crane begins to fly
       if (secondaryCounter % 2 == 0) {
         wingScale = 50;
       } else {
@@ -182,7 +182,7 @@ void draw() {
       if (end % 7 == 0) {
         secondaryCounter++;
       }
-    } else {
+    } else { //wings flap
       if (secondaryCounter % 2 == 0) {
         wingScale = 50;
       } else {
@@ -205,8 +205,10 @@ void draw() {
       }
     }
     i++;
-    println(flyingCounter);
-  } else if (craneHasLooped < 4) {
+    //println(flyingCounter);
+  } 
+//Flying scenes
+    else if (craneHasLooped < 4) {
     drawForestScene();
     textBox();
     textContinue(300, 650);
@@ -236,7 +238,9 @@ void draw() {
     if (craneX == 750) {
       craneHasLooped++;
     }
-  } else {
+  } 
+//Ending scene
+    else {
     drawAllTheHouse();
     if (houseCounter<10) {
       //crane standing
@@ -290,5 +294,4 @@ void draw() {
     crane(craneX, craneY, craneR, craneHeadR, wingScale, craneLegR, craneNeckR);
     houseCounter++;
   }
-  
 }
