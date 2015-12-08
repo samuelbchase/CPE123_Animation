@@ -8,7 +8,7 @@ void mousePressed() {
 }
 
 void drawAllTheHouse() {
-  
+
   if (parentCounter <= 20) {
     noStroke();
     fill(178, 104, 61);
@@ -154,7 +154,6 @@ void drawDoor() {
   ellipse(43, 40, 10, 10);
   ellipse(57, 40, 15, 15);
   fill(0);
-  //eyes
   ellipse(43, 42, 3, 3);
   ellipse(57, 42, 4, 4);
   fill(#FA5DD8);
