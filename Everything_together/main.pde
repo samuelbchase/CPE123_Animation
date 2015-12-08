@@ -45,7 +45,9 @@ void drawDesertScene() {
   endShape(CLOSE);
   popMatrix();
   for (int i = 0; i < numberOfCacti; i++) {
-    drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
+    if (cactusX[i] > -100 && cactusX[i] < 700) {
+      drawACactus(cactusX[i], cactusHeight[i], cactusScale[i]);
+    }
   }
   stroke(0);
   strokeWeight(1);
@@ -56,6 +58,40 @@ void drawDesertScene() {
   noStroke();
   fill(225, 126, 53);
   rect(0, 580, width, 20);
+
+  //tumbleweeds
+  for (int i = 0; i < 20; i++) {
+    if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
+      drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
+    }
+  }
+  tumbleWeedX += 4;
+  tumbleWeedRotate += 12;
+}
+
+void drawTumbleWeed(float tumbleWeedX, float tumbleWeedRotate, float tumbleWeedScale) {
+  pushMatrix();
+  translate(tumbleWeedX, 580-tumbleWeedScale);
+  rotate(tumbleWeedRotate);
+  float xc = 0, yc = 0;
+  for (int i = 0; i < 2900; i += 1) {
+    xc = 0 + tumbleWeedScale*cos((2*(radians(i)/5)))*cos(radians(i));
+    yc = 10 + tumbleWeedScale*cos((2*(radians(i)/5)))*sin(radians(i));
+    noStroke();
+    fill(229, 170, 87);
+    ellipse(xc, yc, tumbleWeedScale/20, tumbleWeedScale/20);
+  }
+  popMatrix();
+}
+
+void drawAllTumbleWeeds() {
+  for (int i = 0; i < 20; i++) {
+    if (tumbleWeedX + tumbleWeedOffset[i] + tumbleWeedRadius[i] > 0 && tumbleWeedX + tumbleWeedOffset[i] - tumbleWeedRadius[i] < 600) {
+      drawTumbleWeed(tumbleWeedX + tumbleWeedOffset[i], radians(tumbleWeedRotate), tumbleWeedRadius[i]);
+    }
+  }
+  tumbleWeedX += 1.7;
+  tumbleWeedRotate += 2;
 }
 
 void drawACactus(float x, float y, float scale) {
@@ -236,14 +272,14 @@ void drawBuilding(int i, int x)
   translate(SamCityWidths[i]/2, -SamCityHeights[i]);
   triangle(-SamCityRoofs[i]/2, 0, SamCityRoofs[i]/2, 0, 0, -20);
   int counter = 1;
-  for(float j = 0; j > .90; j-=.01)
+  for (float j = 0; j > .90; j-=.01)
   {
-  pushMatrix();
-  translate(counter,0);
-  counter++;
-  scale(i);
-  triangle((int)-SamCityRoofs[i]/2, 0, (int)SamCityRoofs[i]/2, 0, 0, -20);
-  popMatrix();  
+    pushMatrix();
+    translate(counter, 0);
+    counter++;
+    scale(i);
+    triangle((int)-SamCityRoofs[i]/2, 0, (int)SamCityRoofs[i]/2, 0, 0, -20);
+    popMatrix();
   }
   line(0, -20, 0, -15+random(-20, 0));
   popMatrix();
@@ -319,8 +355,7 @@ void keyPressed() {
       craneButtonHeight-=10;
     } else if (keyCode == DOWN&&craneY<350) {
       craneButtonHeight+=10;
-   } 
+    }
   } else {
-    
   }
 }

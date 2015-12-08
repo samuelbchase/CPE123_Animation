@@ -17,8 +17,6 @@ float catx, catvx, caty, catvy, parentSize, parentsy, parentsvy;
 float lowerRightArm, RightArm, lowerLeftArm, LeftArm;
 boolean lowerRightArmR, RightArmR, lowerLeftArmR, LeftArmR;
 float gatorHeadR = 0;
-float grassX[] = new float [width];
-float grassY[] = new float [height];
 
 void mousePressed() {
   if (mouseX > 185 & mouseX < 420 & mouseY > 90 & mouseY <460  && houseCounter >50) {
@@ -419,20 +417,20 @@ void prepGround()
   }
 }
 void drawGround() {
-  ////fill(#1C853C);
-  //// rect(0, 470, 600, 200);
+  /*fill(#1C853C);
+   rect(0, 470, 600, 200);*/
 
   i=0;
   for (int x=-10; x< width; x+=random (2, 5)) {
-   for (int y=470; y< height; y++) {
-     fill(foo[i]);
-     pushMatrix();
-     translate(x, y);
-     rotate(radians(30));
-     rect(0, 0, 5, 20);
-     popMatrix();
-     i++;
-   }
+    for (int y=470; y< height; y++) {
+      fill(foo[i]);
+      pushMatrix();
+      translate(x, y);
+      rotate(radians(30));
+      rect(0, 0, 5, 20);
+      popMatrix();
+      i++;
+    }
   }
   fill(#481F11);
   quad(185, 490, 420, 490, 440, 550, 165, 550);
